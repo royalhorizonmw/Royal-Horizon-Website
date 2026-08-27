@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-800 selection:bg-orange-500 selection:text-white font-sans">
+    <main className="min-h-screen bg-white text-slate-800 selection:bg-orange-500 selection:text-white font-sans scroll-smooth">
       
       {/* Top Professional Announcement Bar */}
       <div className="bg-slate-900 text-white text-xs py-2.5 px-6">
@@ -46,7 +46,7 @@ export default function Home() {
             </div>
           </div>
           <nav className="hidden md:flex gap-8 font-medium text-sm text-slate-600">
-            <a href="#home" className="text-orange-600 font-semibold transition">Home</a>
+            <a href="#home" className="hover:text-orange-600 transition">Home</a>
             <a href="#about" className="hover:text-orange-600 transition">About Us</a>
             <a href="#divisions" className="hover:text-orange-600 transition">Divisions & Services</a>
             <a href="#contact" className="hover:text-orange-600 transition">Contact & RFQ</a>
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* 3D / Brand Canvas Placeholder */}
+          {/* Brand Canvas Placeholder */}
           <div className="relative flex justify-center items-center">
             <div className="absolute w-72 h-72 bg-gradient-to-tr from-orange-400/20 to-amber-300/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
             <div className="w-full h-[400px] bg-white border border-slate-200/80 rounded-3xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
@@ -107,6 +107,50 @@ export default function Home() {
             </div>
           </div>
 
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section id="about" className="py-20 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Corporate Background</h2>
+            <h3 className="text-3xl font-black text-slate-900">Rooted in Lilongwe, Built for National Impact</h3>
+            <p className="text-slate-600 leading-relaxed">
+              Royal Horizon Limited is a multi-sector enterprise dedicated to raising standards across Malawi's institutional, medical, and technical landscape. Operating from Area 12, Lilongwe, we bridge global manufacturing excellence with local operational requirements.
+            </p>
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
+                <span className="block text-2xl font-black text-orange-600">6+</span>
+                <span className="text-xs font-semibold text-slate-600">Specialized Divisions</span>
+              </div>
+              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
+                <span className="block text-2xl font-black text-slate-900">100%</span>
+                <span className="text-xs font-semibold text-slate-600">Compliance Focused</span>
+              </div>
+            </div>
+          </div>
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
+            <h4 className="text-xl font-bold border-b border-slate-700 pb-4">Official Corporate Credentials</h4>
+            <ul className="space-y-4 text-sm text-slate-300">
+              <li className="flex justify-between items-center">
+                <span>Registered Name:</span>
+                <span className="font-semibold text-white">Royal Horizon Limited</span>
+              </li>
+              <li className="flex justify-between items-center">
+                <span>Headquarters:</span>
+                <span className="font-semibold text-white">Area 12, Lilongwe, Malawi</span>
+              </li>
+              <li className="flex justify-between items-center">
+                <span>Company Registration:</span>
+                <span className="font-mono text-orange-400">COY-WGWU7L6</span>
+              </li>
+              <li className="flex justify-between items-center">
+                <span>TPIN Number:</span>
+                <span className="font-mono text-orange-400">71284360</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 

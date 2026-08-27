@@ -41,14 +41,6 @@ html {
   background-size: cover;
 }
 
-.rh-logo-image {
-  top: -195.58% !important;
-  left: -46.79% !important;
-  width: 195.33% !important;
-  height: 492.95% !important;
-  max-width: none !important;
-}
-
 .rh-reveal {
   animation: rh-enter 900ms var(--ease-out) both;
 }

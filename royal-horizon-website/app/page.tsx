@@ -46,7 +46,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section with Clean White Canvas & 3D Artwork Integration Slot */}
-      <section id="home" className="relative pt-20 pb-32 px-6 overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white">
+      <section id="home" className="relative pt-20 pb-24 px-6 overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           
           <div className="space-y-6">
@@ -91,6 +91,109 @@ export default function Home() {
                 <span className="text-royalOrange font-bold">Active Canvas</span>
               </div>
             </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 6 Service Divisions Grid */}
+      <section id="divisions" className="py-24 px-6 bg-slate-50/70 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto space-y-16">
+          
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <h2 className="text-xs font-bold text-royalOrange uppercase tracking-widest">Core Capabilities</h2>
+            <p className="text-3xl sm:text-4xl font-black text-royalDark">Specialized Service Divisions</p>
+            <p className="text-slate-600">
+              Tailored high-performance procurement and technical solutions engineered to meet the stringent compliance demands of government bodies, NGOs, and medical institutions.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            {/* Division 1: Medical & Diagnostics */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                🏥
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">Medical & Laboratory Systems</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                Advanced diagnostic equipment, laboratory consumables, reagents, and biomedical support adhering to rigorous healthcare quality frameworks.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Government & NGO Grade →
+              </span>
+            </div>
+
+            {/* Division 2: ICT & Digital Infrastructure */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                💻
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">ICT & Enterprise Hardware</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                Enterprise computing hardware, networking gear, secure server architecture, and specialized technical diagnostics and repairs.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                High-Performance Tech →
+              </span>
+            </div>
+
+            {/* Division 3: Solar & Renewable Energy */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                ☀️
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">Solar & Renewable Power</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                Reliable off-grid solar energy systems, backup inverter arrays, and energy storage solutions ensuring uninterrupted institutional operations.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Sustainable Energy →
+              </span>
+            </div>
+
+            {/* Division 4: General Procurement */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                📦
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">General Institutional Supply</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Trusted Heritage →
+              </span>
+            </div>
+
+            {/* Division 5: Specialized Equipment */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                ⚙️
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">Industrial & Specialized Gear</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                Precision machinery, scientific instruments, heavy-duty hardware parts, and custom tool sourcing for technical facilities.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Precision Sourcing →
+              </span>
+            </div>
+
+            {/* Division 6: Facilities & Maintenance */}
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
+              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+                🏢
+              </div>
+              <h3 className="text-xl font-bold text-royalDark mb-3">Facilities & Technical Support</h3>
+              <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                End-to-end technical maintenance, hardware troubleshooting, asset servicing, and infrastructure consulting services.
+              </p>
+              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Expert Support →
+              </span>
+            </div>
+
           </div>
 
         </div>

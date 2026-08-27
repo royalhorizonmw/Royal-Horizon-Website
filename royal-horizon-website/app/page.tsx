@@ -1,15 +1,29 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    division: 'Medical & Laboratory Systems',
+    message: ''
+  });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
-    <main className="min-h-screen bg-white text-royalDark selection:bg-royalOrange selection:text-white">
+    <main className="min-h-screen bg-white text-slate-800 selection:bg-orange-500 selection:text-white font-sans">
       
       {/* Top Professional Announcement Bar */}
-      <div className="bg-royalDark text-white text-xs py-2.5 px-6">
+      <div className="bg-slate-900 text-white text-xs py-2.5 px-6">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-royalOrange animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
             <span>Area 12, Lilongwe, Malawi | Co. No: COY-WGWU7L6 | TPIN: 71284360</span>
           </div>
           <div className="flex gap-6 text-slate-300">
@@ -20,75 +34,75 @@ export default function Home() {
       </div>
 
       {/* Navigation Bar */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-royalOrange to-amber-500 text-white font-black text-xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-orange-500/20">
+            <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white font-black text-xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-orange-500/20">
               RH
             </div>
             <div>
-              <span className="text-lg font-extrabold tracking-tight text-royalDark block leading-none">Royal Horizon</span>
-              <span className="text-[10px] text-royalOrange font-bold tracking-widest uppercase">Limited</span>
+              <span className="text-lg font-extrabold tracking-tight text-slate-900 block leading-none">Royal Horizon</span>
+              <span className="text-[10px] text-orange-600 font-bold tracking-widest uppercase">Limited</span>
             </div>
           </div>
           <nav className="hidden md:flex gap-8 font-medium text-sm text-slate-600">
-            <a href="#home" className="text-royalOrange font-semibold transition">Home</a>
-            <a href="#about" className="hover:text-royalOrange transition">About Us</a>
-            <a href="#divisions" className="hover:text-royalOrange transition">Divisions & Services</a>
-            <a href="#contact" className="hover:text-royalOrange transition">Contact & RFQ</a>
+            <a href="#home" className="text-orange-600 font-semibold transition">Home</a>
+            <a href="#about" className="hover:text-orange-600 transition">About Us</a>
+            <a href="#divisions" className="hover:text-orange-600 transition">Divisions & Services</a>
+            <a href="#contact" className="hover:text-orange-600 transition">Contact & RFQ</a>
           </nav>
           <div>
-            <a href="#contact" className="bg-royalOrange hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:-translate-y-0.5">
+            <a href="#contact" className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:-translate-y-0.5">
               Request a Quote
             </a>
           </div>
         </div>
       </header>
 
-      {/* Hero Section with Clean White Canvas & 3D Artwork Integration Slot */}
-      <section id="home" className="relative pt-20 pb-24 px-6 overflow-hidden bg-gradient-to-b from-white via-slate-50/50 to-white">
+      {/* Hero Section */}
+      <section id="home" className="relative pt-20 pb-24 px-6 overflow-hidden bg-gradient-to-b from-white via-orange-50/20 to-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-royalOrange"></span>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider">Malawi's Premier Integrated Partner</span>
+              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">Malawi's Premier Integrated Partner</span>
             </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-royalDark leading-[1.1]">
-              Excellence in <span className="text-transparent bg-clip-text bg-gradient-to-r from-royalOrange to-amber-500">Supply</span> & Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-royalDark to-slate-700">Solutions</span>
+            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
+              Excellence in <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Supply</span> & Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700">Solutions</span>
             </h1>
             <p className="text-slate-600 text-lg leading-relaxed max-w-xl">
               Powering hospitals, NGOs, government institutions, and corporate leaders across Malawi with uncompromising quality, cutting-edge ICT, solar power, and trusted procurement heritage.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
-              <a href="#divisions" className="bg-royalOrange hover:bg-orange-600 text-white font-semibold px-7 py-3.5 rounded-xl shadow-xl shadow-orange-500/20 transition-all">
+              <a href="#divisions" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-7 py-3.5 rounded-xl shadow-xl shadow-orange-500/20 transition-all">
                 Explore Divisions
               </a>
-              <a href="#contact" className="bg-white hover:bg-slate-50 text-royalDark border border-slate-200 font-semibold px-7 py-3.5 rounded-xl transition-all shadow-sm">
+              <a href="#contact" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 font-semibold px-7 py-3.5 rounded-xl transition-all shadow-sm">
                 Submit Tender / RFQ
               </a>
             </div>
           </div>
 
-          {/* Right 3D Artwork / Carton Canvas Placeholder */}
+          {/* 3D / Brand Canvas Placeholder */}
           <div className="relative flex justify-center items-center">
             <div className="absolute w-72 h-72 bg-gradient-to-tr from-orange-400/20 to-amber-300/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
             <div className="w-full h-[400px] bg-white border border-slate-200/80 rounded-3xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
               <div className="absolute top-4 right-4 bg-amber-400/10 border border-amber-400/30 text-amber-700 text-xs font-bold px-3 py-1 rounded-lg">
-                Interactive 3D Asset Space
+                Corporate Showcase
               </div>
               <div className="my-auto text-center space-y-3">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-royalOrange to-solarYellow rounded-2xl shadow-lg flex items-center justify-center text-white text-3xl font-black rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-amber-400 rounded-2xl shadow-lg flex items-center justify-center text-white text-3xl font-black rotate-12 group-hover:rotate-0 transition-transform duration-500">
                   RH
                 </div>
-                <h3 className="font-bold text-slate-800 text-lg">Royal Horizon 3D Emblem</h3>
+                <h3 className="font-bold text-slate-800 text-lg">Royal Horizon Limited</h3>
                 <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                  Ready for embedded Spline / Three.js interactive modular carton representing our dual supply & solutions infrastructure.
+                  Registered Enterprise & Specialized Procurement Partner based in Area 12, Lilongwe.
                 </p>
               </div>
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 flex justify-between items-center text-xs text-slate-600 font-medium">
-                <span>Status: Configured for WebGL</span>
-                <span className="text-royalOrange font-bold">Active Canvas</span>
+                <span>Compliance: Verified</span>
+                <span className="text-orange-600 font-bold">Active Operations</span>
               </div>
             </div>
           </div>
@@ -101,8 +115,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto space-y-16">
           
           <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-xs font-bold text-royalOrange uppercase tracking-widest">Core Capabilities</h2>
-            <p className="text-3xl sm:text-4xl font-black text-royalDark">Specialized Service Divisions</p>
+            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Core Capabilities</h2>
+            <p className="text-3xl sm:text-4xl font-black text-slate-900">Specialized Service Divisions</p>
             <p className="text-slate-600">
               Tailored high-performance procurement and technical solutions engineered to meet the stringent compliance demands of government bodies, NGOs, and medical institutions.
             </p>
@@ -110,86 +124,86 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            {/* Division 1: Medical & Diagnostics */}
+            {/* Division 1 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 🏥
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">Medical & Laboratory Systems</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Medical & Laboratory Systems</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Advanced diagnostic equipment, laboratory consumables, reagents, and biomedical support adhering to rigorous healthcare quality frameworks.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 Government & NGO Grade →
               </span>
             </div>
 
-            {/* Division 2: ICT & Digital Infrastructure */}
+            {/* Division 2 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 💻
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">ICT & Enterprise Hardware</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">ICT & Enterprise Hardware</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Enterprise computing hardware, networking gear, secure server architecture, and specialized technical diagnostics and repairs.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 High-Performance Tech →
               </span>
             </div>
 
-            {/* Division 3: Solar & Renewable Energy */}
+            {/* Division 3 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 ☀️
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">Solar & Renewable Power</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Solar & Renewable Power</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Reliable off-grid solar energy systems, backup inverter arrays, and energy storage solutions ensuring uninterrupted institutional operations.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 Sustainable Energy →
               </span>
             </div>
 
-            {/* Division 4: General Procurement */}
+            {/* Division 4 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 📦
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">General Institutional Supply</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">General Institutional Supply</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 Trusted Heritage →
               </span>
             </div>
 
-            {/* Division 5: Specialized Equipment */}
+            {/* Division 5 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 ⚙️
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">Industrial & Specialized Gear</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Industrial & Specialized Gear</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 Precision machinery, scientific instruments, heavy-duty hardware parts, and custom tool sourcing for technical facilities.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 Precision Sourcing →
               </span>
             </div>
 
-            {/* Division 6: Facilities & Maintenance */}
+            {/* Division 6 */}
             <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-royalOrange rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-royalOrange group-hover:text-white transition-colors">
+              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 🏢
               </div>
-              <h3 className="text-xl font-bold text-royalDark mb-3">Facilities & Technical Support</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">Facilities & Technical Support</h3>
               <p className="text-slate-600 text-sm leading-relaxed mb-6">
                 End-to-end technical maintenance, hardware troubleshooting, asset servicing, and infrastructure consulting services.
               </p>
-              <span className="text-xs font-bold text-royalOrange uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                 Expert Support →
               </span>
             </div>
@@ -198,6 +212,157 @@ export default function Home() {
 
         </div>
       </section>
+
+      {/* Interactive Contact & RFQ Section */}
+      <section id="contact" className="py-24 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">Tender & Quotation Desk</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+              Partner With <span className="text-orange-600">Royal Horizon</span>
+            </h2>
+            <p className="text-slate-600 text-lg leading-relaxed">
+              Whether you are releasing a government tender, procuring medical diagnostics, or ordering enterprise tech solutions, our Lilongwe team is ready to respond with competitive pricing and compliance documentation.
+            </p>
+            
+            <div className="space-y-4 pt-4 border-t border-slate-100 text-slate-600 text-sm">
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-slate-900 w-28">Headquarters:</span>
+                <span>Area 12, Lilongwe, Malawi</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-slate-900 w-28">Company No:</span>
+                <span className="font-mono bg-slate-100 px-2.5 py-1 rounded text-slate-800">COY-WGWU7L6</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-slate-900 w-28">TPIN Number:</span>
+                <span className="font-mono bg-slate-100 px-2.5 py-1 rounded text-slate-800">71284360</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Form Card */}
+          <div className="bg-slate-50 border border-slate-200/80 p-8 sm:p-10 rounded-3xl shadow-xl">
+            {submitted ? (
+              <div className="text-center py-12 space-y-4">
+                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">
+                  ✓
+                </div>
+                <h3 className="text-2xl font-bold text-slate-900">RFQ Received Successfully</h3>
+                <p className="text-slate-600 text-sm max-w-sm mx-auto">
+                  Thank you for reaching out. Our procurement team in Lilongwe will review your specifications and get back to you shortly.
+                </p>
+                <button 
+                  onClick={() => setSubmitted(false)}
+                  className="mt-4 bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-xl text-sm"
+                >
+                  Send Another Inquiry
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Request for Quotation (RFQ)</h3>
+                
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Full Name / Organization</label>
+                  <input 
+                    type="text" 
+                    required 
+                    placeholder="e.g., Ministry of Health / Corporate Buyer" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                  />
+                </div>
+
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Email Address</label>
+                    <input 
+                      type="email" 
+                      required 
+                      placeholder="buyer@institution.mw" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      required 
+                      placeholder="+265..." 
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Select Service Division</label>
+                  <select 
+                    value={formData.division}
+                    onChange={(e) => setFormData({...formData, division: e.target.value})}
+                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                  >
+                    <option>Medical & Laboratory Systems</option>
+                    <option>ICT & Enterprise Hardware</option>
+                    <option>Solar & Renewable Power</option>
+                    <option>General Institutional Supply</option>
+                    <option>Industrial & Specialized Gear</option>
+                    <option>Facilities & Technical Support</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Project Specifications / RFQ Details</label>
+                  <textarea 
+                    rows={4} 
+                    required 
+                    placeholder="Provide details regarding quantities, delivery timeline, or tender requirements..." 
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition resize-none"
+                  ></textarea>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all text-sm uppercase tracking-wider"
+                >
+                  Submit Official RFQ
+                </button>
+              </form>
+            )}
+          </div>
+
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800 text-sm">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
+              RH
+            </div>
+            <div>
+              <span className="text-white font-bold block leading-tight">Royal Horizon Limited</span>
+              <span className="text-xs text-slate-400">Area 12, Lilongwe, Malawi</span>
+            </div>
+          </div>
+          <div className="text-center md:text-right text-xs space-y-1">
+            <p>&copy; {new Date().getFullYear()} Royal Horizon Limited. All rights reserved.</p>
+            <p className="text-slate-400">Co. Reg: COY-WGWU7L6 | TPIN: 71284360</p>
+          </div>
+        </div>
+      </footer>
 
     </main>
   );

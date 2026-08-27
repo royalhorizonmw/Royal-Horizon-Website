@@ -549,7 +549,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-slate-900">Office Location</h4>
-                    <p className="mt-1 text-sm text-slate-600">Area 12, Lilongwe, Malawi</p>
+                    <p className="mt-1 text-sm text-slate-600">Synergy CoWorks, Plot 526 Songwe Street, New Area 12, Lilongwe</p>
                   </div>
                 </div>
 
@@ -611,10 +611,10 @@ export default function Home() {
             <div className="flex flex-col gap-4 border-b border-slate-100 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">Visit our office</p>
-                <h3 className="mt-1 text-lg font-bold text-slate-900">Area 12, Lilongwe, Malawi</h3>
+                <h3 className="mt-1 text-lg font-bold text-slate-900">Synergy CoWorks, Plot 526 Songwe Street</h3>
               </div>
               <a
-                href="https://www.google.com/maps/search/?api=1&query=Area+12%2C+Lilongwe%2C+Malawi"
+                href="https://www.google.com/maps/search/?api=1&query=-13.9551086711604%2C33.815891197177606"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition hover:border-orange-200 hover:text-orange-600"
@@ -623,8 +623,8 @@ export default function Home() {
               </a>
             </div>
             <iframe
-              title="Map showing Royal Horizon Limited office in Area 12, Lilongwe"
-              src="https://www.google.com/maps?q=Area%2012%2C%20Lilongwe%2C%20Malawi&z=15&output=embed"
+              title="Map showing Royal Horizon Limited office at Synergy CoWorks on Songwe Street, Lilongwe"
+              src="https://www.google.com/maps?q=-13.9551086711604%2C33.815891197177606&z=17&output=embed"
               width="100%"
               height="420"
               className="block w-full border-0 grayscale-[15%]"

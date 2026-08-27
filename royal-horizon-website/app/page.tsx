@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 // Service Division Data for Modals
 const divisionsData = [
@@ -65,12 +64,15 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
 
-    // Using EmailJS (configure your service ID, template ID, and public key when ready)
-    // For now, simulates an instant successful dispatch while setting up the hook
+    // Simulate instant dispatch and open user's email client as backup
     setTimeout(() => {
       setLoading(false);
       setSubmitted(true);
-    }, 1000);
+      
+      // Construct mailto link so it drafts an email to royalhorizonmw@gmail.com
+      const mailtoLink = `mailto:royalhorizonmw@gmail.com?subject=RFQ from ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.division)})&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nDivision: ${formData.division}\n\nMessage:\n${formData.message}`)}`;
+      window.open(mailtoLink, '_blank');
+    }, 800);
   };
 
   return (
@@ -420,7 +422,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900">RFQ Dispatched Successfully</h3>
                 <p className="text-slate-600 text-sm max-w-sm mx-auto">
-                  Thank you for reaching out. Your inquiry has been sent directly to our procurement team at <span className="font-semibold text-slate-800">royalhorizonmw@gmail.com</span>. We will respond shortly.
+                  Thank you for reaching out. Your email client has been prepared to send your inquiry directly to <span className="font-semibold text-slate-800">royalhorizonmw@gmail.com</span>.
                 </p>
                 <button 
                   onClick={() => setSubmitted(false)}
@@ -503,7 +505,7 @@ export default function Home() {
                   disabled={loading}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all text-sm uppercase tracking-wider disabled:opacity-50"
                 >
-                  {loading ? 'Sending RFQ to Inbox...' : 'Submit Official RFQ'}
+                  {loading ? 'Preparing Email Dispatch...' : 'Submit Official RFQ'}
                 </button>
               </form>
             )}

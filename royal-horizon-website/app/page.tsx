@@ -17,6 +17,8 @@ import {
   MessageSquare,
   Send,
   CheckCircle,
+  ArrowUpRight,
+  Building2,
 } from "lucide-react";
 
 export default function Home() {
@@ -69,6 +71,38 @@ export default function Home() {
       icon: Wrench,
       title: "Facilities Support",
       text: "Facility equipment, structural maintenance support, and technical service solutions.",
+    },
+  ];
+
+  const institutionTypes = [
+    "Hospitals & Clinics",
+    "Government Institutions",
+    "NGOs & Programmes",
+    "Research Organisations",
+    "Banks & Businesses",
+  ];
+
+  const insights = [
+    {
+      category: "Healthcare Supply",
+      title: "A practical guide to planning institutional medical supply orders",
+      summary: "How better specifications, lead-time planning, and delivery checks reduce procurement risk.",
+      image: "/insight-medical-supply.png",
+      alt: "A Malawian healthcare and procurement team checking delivered medical supplies",
+    },
+    {
+      category: "ICT Infrastructure",
+      title: "Building dependable ICT environments for growing organisations",
+      summary: "The essentials behind resilient networks, compatible equipment, and long-term support.",
+      image: "/insight-ict-deployment.png",
+      alt: "Malawian technology professionals deploying institutional ICT equipment",
+    },
+    {
+      category: "Renewable Energy",
+      title: "What institutions should assess before investing in solar power",
+      summary: "A clear starting point for sizing, installation planning, maintenance, and continuity.",
+      image: "/insight-solar-project.png",
+      alt: "Engineers inspecting solar panels at an institutional facility in Malawi",
     },
   ];
 
@@ -128,6 +162,18 @@ export default function Home() {
               Divisions & Services
             </a>
             <a
+              href="#rates"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
+            >
+              Rates
+            </a>
+            <a
+              href="#insights"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
+            >
+              Insights
+            </a>
+            <a
               href="#contact"
               className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
             >
@@ -175,6 +221,20 @@ export default function Home() {
                 className="text-sm font-medium text-slate-700 hover:text-orange-600"
               >
                 Divisions & Services
+              </a>
+              <a
+                href="#rates"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                Rates
+              </a>
+              <a
+                href="#insights"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                Insights
               </a>
               <a
                 href="#contact"
@@ -298,6 +358,31 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Institutional Client Base */}
+      <section aria-labelledby="client-base-title" className="rh-scroll border-y border-slate-100 bg-white/95 py-12">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-sm">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Who we serve</span>
+              <h2 id="client-base-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900">
+                Built for institutional buyers.
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                Verified client names and logos will be added only with approval.
+              </p>
+            </div>
+            <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {institutionTypes.map((type) => (
+                <div key={type} className="group flex min-h-28 flex-col justify-between rounded-2xl border border-slate-200 bg-[#f7f7f3] p-4 transition hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-slate-900/5">
+                  <Building2 className="h-5 w-5 text-slate-400 transition group-hover:text-orange-500" />
+                  <p className="mt-5 text-xs font-bold leading-snug text-slate-700">{type}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="rh-scroll py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -379,6 +464,67 @@ export default function Home() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Rates */}
+      <section id="rates" className="rh-scroll bg-[#ecebe7]/95 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Rates & quotations</span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-5xl">
+                Clear pricing, shaped around the requirement.
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600">
+                Institutional supply costs vary by specification, quantity, delivery location, lead time, and installation needs. We provide a documented quotation after reviewing your brief.
+              </p>
+              <button onClick={() => setIsQuoteModalOpen(true)} className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#74787e] px-7 py-3.5 text-sm font-bold text-white transition hover:bg-[#64686e]">
+                Request tailored rates <ArrowUpRight className="h-4 w-4" />
+              </button>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                ["01", "Standard supply", "Quoted by item, quantity, specification, and delivery point."],
+                ["02", "Projects & tenders", "Structured pricing for multi-line requirements and phased delivery."],
+                ["03", "Support agreements", "Custom service rates based on scope, response time, and coverage."],
+              ].map(([number, title, text]) => (
+                <article key={number} className="rounded-[1.75rem] border border-white/80 bg-white p-6 shadow-sm">
+                  <span className="text-xs font-black text-orange-500">{number}</span>
+                  <h3 className="mt-8 text-lg font-bold text-slate-900">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Insights */}
+      <section id="insights" className="rh-scroll bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Insights</span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Practical thinking for better procurement.</h2>
+            </div>
+            <p className="max-w-sm text-sm leading-relaxed text-slate-500">Guidance for teams planning supply, technology, and infrastructure investments across Malawi.</p>
+          </div>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {insights.map((insight) => (
+              <article key={insight.title} className="rh-insight-card group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#f7f7f3]">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image src={insight.image} alt={insight.alt} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
+                </div>
+                <div className="p-7">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-orange-600">{insight.category}</span>
+                  <h3 className="mt-3 text-xl font-bold leading-snug text-slate-900">{insight.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{insight.summary}</p>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-slate-700">Read insight <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" /></span>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

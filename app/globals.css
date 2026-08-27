@@ -41,6 +41,11 @@ html {
   background-size: cover;
 }
 
+.rh-logo-image {
+  object-fit: fill;
+  transform: scale(2.15);
+}
+
 .rh-reveal {
   animation: rh-enter 900ms var(--ease-out) both;
 }

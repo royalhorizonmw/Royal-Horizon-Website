@@ -34,7 +34,7 @@ export default function Home() {
       </div>
 
       {/* Navigation Bar */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white font-black text-xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-orange-500/20">
@@ -49,6 +49,7 @@ export default function Home() {
             <a href="#home" className="hover:text-orange-600 transition">Home</a>
             <a href="#about" className="hover:text-orange-600 transition">About Us</a>
             <a href="#divisions" className="hover:text-orange-600 transition">Divisions & Services</a>
+            <a href="#compliance" className="hover:text-orange-600 transition">Compliance</a>
             <a href="#contact" className="hover:text-orange-600 transition">Contact & RFQ</a>
           </nav>
           <div>
@@ -84,7 +85,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Brand Canvas Placeholder */}
+          {/* Brand Canvas Preview Card */}
           <div className="relative flex justify-center items-center">
             <div className="absolute w-72 h-72 bg-gradient-to-tr from-orange-400/20 to-amber-300/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
             <div className="w-full h-[400px] bg-white border border-slate-200/80 rounded-3xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
@@ -110,46 +111,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Us Section */}
-      <section id="about" className="py-20 px-6 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      {/* About Us Deep-Dive Section */}
+      <section id="about" className="py-24 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Corporate Background</h2>
-            <h3 className="text-3xl font-black text-slate-900">Rooted in Lilongwe, Built for National Impact</h3>
-            <p className="text-slate-600 leading-relaxed">
-              Royal Horizon Limited is a multi-sector enterprise dedicated to raising standards across Malawi's institutional, medical, and technical landscape. Operating from Area 12, Lilongwe, we bridge global manufacturing excellence with local operational requirements.
+            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">About Royal Horizon</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              Rooted in Lilongwe, Built for National Impact
+            </h2>
+            <p className="text-slate-600 text-base leading-relaxed">
+              Royal Horizon Limited is structured as a multi-sector enterprise dedicated to delivering excellence across Malawi's institutional, medical, and technical landscape. Operating from our headquarters in Area 12, Lilongwe, we bridge global manufacturing standards with rigorous local procurement frameworks.
             </p>
-            <div className="grid grid-cols-2 gap-4 pt-2">
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
-                <span className="block text-2xl font-black text-orange-600">6+</span>
-                <span className="text-xs font-semibold text-slate-600">Specialized Divisions</span>
+            <p className="text-slate-600 text-base leading-relaxed">
+              Our leadership and operational teams bring profound technical expertise, ensuring every medical diagnostic tool, enterprise ICT deployment, solar installation, and industrial supply meets the highest compliance benchmarks demanded by government bodies and international NGOs.
+            </p>
+            <div className="grid grid-cols-2 gap-6 pt-4">
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/60">
+                <span className="block text-3xl font-black text-orange-600">6+</span>
+                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1 block">Specialized Divisions</span>
               </div>
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60">
-                <span className="block text-2xl font-black text-slate-900">100%</span>
-                <span className="text-xs font-semibold text-slate-600">Compliance Focused</span>
+              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/60">
+                <span className="block text-3xl font-black text-slate-900">100%</span>
+                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1 block">Institutional Grade</span>
               </div>
             </div>
           </div>
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 sm:p-10 rounded-3xl shadow-xl space-y-6">
-            <h4 className="text-xl font-bold border-b border-slate-700 pb-4">Official Corporate Credentials</h4>
+
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 sm:p-10 rounded-3xl shadow-2xl space-y-6 relative overflow-hidden">
+            <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-2xl"></div>
+            <h3 className="text-xl font-bold border-b border-slate-700 pb-4">Corporate Credentials & Verification</h3>
             <ul className="space-y-4 text-sm text-slate-300">
-              <li className="flex justify-between items-center">
-                <span>Registered Name:</span>
+              <li className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-400">Registered Entity:</span>
                 <span className="font-semibold text-white">Royal Horizon Limited</span>
               </li>
-              <li className="flex justify-between items-center">
-                <span>Headquarters:</span>
+              <li className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-400">Headquarters:</span>
                 <span className="font-semibold text-white">Area 12, Lilongwe, Malawi</span>
               </li>
-              <li className="flex justify-between items-center">
-                <span>Company Registration:</span>
-                <span className="font-mono text-orange-400">COY-WGWU7L6</span>
+              <li className="flex justify-between items-center py-2 border-b border-slate-800">
+                <span className="text-slate-400">Company Registration:</span>
+                <span className="font-mono text-orange-400 font-bold">COY-WGWU7L6</span>
               </li>
-              <li className="flex justify-between items-center">
-                <span>TPIN Number:</span>
-                <span className="font-mono text-orange-400">71284360</span>
+              <li className="flex justify-between items-center py-2">
+                <span className="text-slate-400">TPIN Number:</span>
+                <span className="font-mono text-orange-400 font-bold">71284360</span>
               </li>
             </ul>
+            <div className="pt-2">
+              <span className="inline-block bg-orange-500/20 border border-orange-500/40 text-orange-300 text-xs font-bold px-3.5 py-1.5 rounded-xl">
+                ✓ Verified Malawi Revenue Authority & Registrar Compliant
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -169,85 +185,97 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             {/* Division 1 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                🏥
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  🏥
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Medical & Laboratory Systems</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Advanced diagnostic equipment, laboratory consumables, reagents, centrifuges, and biomedical support adhering to rigorous healthcare quality frameworks.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Medical & Laboratory Systems</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Advanced diagnostic equipment, laboratory consumables, reagents, and biomedical support adhering to rigorous healthcare quality frameworks.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 Government & NGO Grade →
               </span>
             </div>
 
             {/* Division 2 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                💻
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  💻
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">ICT & Enterprise Hardware</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Enterprise computing hardware, networking gear, secure server architecture, laptops, and specialized technical diagnostics and micro-soldering repairs.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">ICT & Enterprise Hardware</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Enterprise computing hardware, networking gear, secure server architecture, and specialized technical diagnostics and repairs.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 High-Performance Tech →
               </span>
             </div>
 
             {/* Division 3 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                ☀️
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  ☀️
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Solar & Renewable Power</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Reliable off-grid solar energy systems, backup inverter arrays, lithium battery banks, and energy storage solutions ensuring uninterrupted institutional operations.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Solar & Renewable Power</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Reliable off-grid solar energy systems, backup inverter arrays, and energy storage solutions ensuring uninterrupted institutional operations.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 Sustainable Energy →
               </span>
             </div>
 
             {/* Division 4 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                📦
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  📦
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">General Institutional Supply</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management across Malawi.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">General Institutional Supply</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 Trusted Heritage →
               </span>
             </div>
 
             {/* Division 5 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                ⚙️
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  ⚙️
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Industrial & Specialized Gear</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  Precision machinery, scientific instruments, heavy-duty hardware parts, automotive electrical wiring components, and custom tool sourcing.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Industrial & Specialized Gear</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                Precision machinery, scientific instruments, heavy-duty hardware parts, and custom tool sourcing for technical facilities.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 Precision Sourcing →
               </span>
             </div>
 
             {/* Division 6 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group">
-              <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                🏢
+            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
+              <div>
+                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                  🏢
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">Facilities & Technical Support</h3>
+                <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                  End-to-end technical maintenance, hardware troubleshooting, asset servicing, laboratory quality management consulting, and infrastructure advisory.
+                </p>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Facilities & Technical Support</h3>
-              <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                End-to-end technical maintenance, hardware troubleshooting, asset servicing, and infrastructure consulting services.
-              </p>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
                 Expert Support →
               </span>
             </div>
@@ -257,8 +285,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Compliance & Standards Section */}
+      <section id="compliance" className="py-24 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto space-y-16">
+          <div className="text-center max-w-2xl mx-auto space-y-4">
+            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Institutional Assurance</h2>
+            <p className="text-3xl sm:text-4xl font-black text-slate-900">Commitment to Quality & Compliance</p>
+            <p className="text-slate-600">
+              Operating under strict quality management frameworks inspired by international standards to guarantee reliability across all public and private sector engagements.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
+                01
+              </div>
+              <h3 className="font-bold text-slate-900 text-lg">Regulatory Alignment</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Fully registered under Malawi corporate laws with active tax compliance and verified TPIN registration for transparent tender processing.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
+                02
+              </div>
+              <h3 className="font-bold text-slate-900 text-lg">Rigorous Sourcing</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Direct partnerships and vetted supply chains ensuring that all medical, ICT, and industrial goods meet exacting specification standards.
+              </p>
+            </div>
+
+            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
+              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
+                03
+              </div>
+              <h3 className="font-bold text-slate-900 text-lg">Local Expertise</h3>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Lilongwe-based operational presence ensuring rapid response times, personalized technical support, and seamless delivery coordination.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Interactive Contact & RFQ Section */}
-      <section id="contact" className="py-24 px-6 bg-white border-t border-slate-100">
+      <section id="contact" className="py-24 px-6 bg-slate-50/70 border-t border-slate-100">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           
           <div className="space-y-6">
@@ -273,24 +346,32 @@ export default function Home() {
               Whether you are releasing a government tender, procuring medical diagnostics, or ordering enterprise tech solutions, our Lilongwe team is ready to respond with competitive pricing and compliance documentation.
             </p>
             
-            <div className="space-y-4 pt-4 border-t border-slate-100 text-slate-600 text-sm">
+            <div className="space-y-4 pt-4 border-t border-slate-200 text-slate-600 text-sm">
               <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-28">Headquarters:</span>
+                <span className="font-bold text-slate-900 w-32">Headquarters:</span>
                 <span>Area 12, Lilongwe, Malawi</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-28">Company No:</span>
-                <span className="font-mono bg-slate-100 px-2.5 py-1 rounded text-slate-800">COY-WGWU7L6</span>
+                <span className="font-bold text-slate-900 w-32">Company No:</span>
+                <span className="font-mono bg-white border border-slate-200 px-3 py-1 rounded-lg text-slate-800">COY-WGWU7L6</span>
               </div>
               <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-28">TPIN Number:</span>
-                <span className="font-mono bg-slate-100 px-2.5 py-1 rounded text-slate-800">71284360</span>
+                <span className="font-bold text-slate-900 w-32">TPIN Number:</span>
+                <span className="font-mono bg-white border border-slate-200 px-3 py-1 rounded-lg text-slate-800">71284360</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-slate-900 w-32">Direct Phone:</span>
+                <span className="text-slate-800 font-semibold">+265 880 273 292</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="font-bold text-slate-900 w-32">Email Inquiry:</span>
+                <span className="text-orange-600 font-semibold">royalhorizonmw@gmail.com</span>
               </div>
             </div>
           </div>
 
           {/* Form Card */}
-          <div className="bg-slate-50 border border-slate-200/80 p-8 sm:p-10 rounded-3xl shadow-xl">
+          <div className="bg-white border border-slate-200/80 p-8 sm:p-10 rounded-3xl shadow-xl">
             {submitted ? (
               <div className="text-center py-12 space-y-4">
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">
@@ -319,7 +400,7 @@ export default function Home() {
                     placeholder="e.g., Ministry of Health / Corporate Buyer" 
                     value={formData.name}
                     onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
                   />
                 </div>
 
@@ -332,7 +413,7 @@ export default function Home() {
                       placeholder="buyer@institution.mw" 
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
                     />
                   </div>
                   <div>
@@ -343,7 +424,7 @@ export default function Home() {
                       placeholder="+265..." 
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
                     />
                   </div>
                 </div>
@@ -353,7 +434,7 @@ export default function Home() {
                   <select 
                     value={formData.division}
                     onChange={(e) => setFormData({...formData, division: e.target.value})}
-                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
                   >
                     <option>Medical & Laboratory Systems</option>
                     <option>ICT & Enterprise Hardware</option>
@@ -372,7 +453,7 @@ export default function Home() {
                     placeholder="Provide details regarding quantities, delivery timeline, or tender requirements..." 
                     value={formData.message}
                     onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition resize-none"
+                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition resize-none"
                   ></textarea>
                 </div>
 

@@ -102,8 +102,8 @@ export default function Home() {
               width={2440}
               height={991}
               priority
-              sizes="176px"
-              className="h-auto w-44"
+              sizes="144px"
+              className="h-auto w-36"
             />
           </a>
 
@@ -268,8 +268,8 @@ export default function Home() {
                         alt="Royal Horizon Limited"
                         width={2440}
                         height={991}
-                        sizes="160px"
-                        className="h-auto w-40"
+                        sizes="128px"
+                        className="h-auto w-32"
                       />
                       <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold text-slate-300">6 divisions</span>
                     </div>
@@ -474,8 +474,8 @@ export default function Home() {
               alt="Royal Horizon Limited"
               width={2440}
               height={991}
-              sizes="192px"
-              className="h-auto w-48"
+              sizes="160px"
+              className="h-auto w-40"
             />
             <p className="mt-1 text-sm text-slate-500">
               Area 12, Lilongwe, Malawi

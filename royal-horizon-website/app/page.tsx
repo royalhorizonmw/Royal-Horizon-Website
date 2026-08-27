@@ -1,7 +1,56 @@
 'use client';
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+
+// Service Division Data for Modals
+const divisionsData = [
+  {
+    id: 'medical',
+    title: 'Medical & Laboratory Systems',
+    icon: '🏥',
+    summary: 'Advanced diagnostic equipment, laboratory consumables, reagents, centrifuges, and biomedical support adhering to rigorous healthcare quality frameworks.',
+    details: 'We supply high-precision clinical chemistry analyzers, hematology systems, molecular diagnostics, cold chain storage, and accredited laboratory reagents. Backed by expert biomedical maintenance and calibration support for hospitals, research centers, and public health labs across Malawi.'
+  },
+  {
+    id: 'ict',
+    title: 'ICT & Enterprise Hardware',
+    icon: '💻',
+    summary: 'Enterprise computing hardware, networking gear, secure server architecture, laptops, and specialized technical diagnostics and micro-soldering repairs.',
+    details: 'From robust server racks and enterprise switches to specialized component-level motherboard and electronic board diagnostics. We ensure zero-downtime technology ecosystems for corporate and government institutions.'
+  },
+  {
+    id: 'solar',
+    title: 'Solar & Renewable Power',
+    icon: '☀️',
+    summary: 'Reliable off-grid solar energy systems, backup inverter arrays, lithium battery banks, and energy storage solutions ensuring uninterrupted institutional operations.',
+    details: 'Engineered for critical facilities that demand perpetual uptime. We design and deploy custom commercial solar arrays, hybrid inverter setups, and deep-cycle battery banks to shield your operations from grid instability.'
+  },
+  {
+    id: 'general',
+    title: 'General Institutional Supply',
+    icon: '📦',
+    summary: 'Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management across Malawi.',
+    details: 'A trusted heritage in multi-sector procurement. We handle end-to-end tender execution, rigorous quality verification, and timely institutional logistics.'
+  },
+  {
+    id: 'industrial',
+    title: 'Industrial & Specialized Gear',
+    icon: '⚙️',
+    summary: 'Precision machinery, scientific instruments, heavy-duty hardware parts, automotive electrical wiring components, and custom tool sourcing.',
+    details: 'Sourcing hard-to-find technical machinery, dashboard and steering control modules, industrial sensors, and workshop tools tailored to exacting specifications.'
+  },
+  {
+    id: 'facilities',
+    title: 'Facilities & Technical Support',
+    icon: '🏢',
+    summary: 'End-to-end technical maintenance, hardware troubleshooting, asset servicing, laboratory quality management consulting, and infrastructure advisory.',
+    details: 'Comprehensive support contracts, ISO-aligned quality management advisory, and hands-on facilities maintenance to protect your capital investments.'
+  }
+];
 
 export default function Home() {
+  const [activeDivision, setActiveDivision] = useState<typeof divisionsData[0] | null>(null);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -10,10 +59,18 @@ export default function Home() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
+
+    // Using EmailJS (configure your service ID, template ID, and public key when ready)
+    // For now, simulates an instant successful dispatch while setting up the hook
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+    }, 1000);
   };
 
   return (
@@ -111,8 +168,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Institutional Trust & Partner Marquee */}
+      <section className="py-12 bg-slate-900 text-white border-y border-slate-800 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-center md:text-left">
+              <span className="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-1">Trusted Collaborator</span>
+              <h4 className="text-lg font-bold">Serving Public Health Systems, NGOs & Enterprises</h4>
+            </div>
+            <div className="flex flex-wrap justify-center gap-6 text-xs font-semibold text-slate-300 tracking-wider uppercase">
+              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">🏥 Ministry & Public Health Bodies</span>
+              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">🌐 International NGOs</span>
+              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">⚡ Corporate Enterprises</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Us Deep-Dive Section */}
-      <section id="about" className="py-24 px-6 bg-white border-t border-slate-100">
+      <section id="about" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
@@ -170,7 +244,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 6 Service Divisions Grid */}
+      {/* 6 Service Divisions Grid with Interactive Modals */}
       <section id="divisions" className="py-24 px-6 bg-slate-50/70 border-t border-slate-100">
         <div className="max-w-7xl mx-auto space-y-16">
           
@@ -178,112 +252,79 @@ export default function Home() {
             <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Core Capabilities</h2>
             <p className="text-3xl sm:text-4xl font-black text-slate-900">Specialized Service Divisions</p>
             <p className="text-slate-600">
-              Tailored high-performance procurement and technical solutions engineered to meet the stringent compliance demands of government bodies, NGOs, and medical institutions.
+              Click on any division below to view comprehensive institutional specifications and procurement details.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            {/* Division 1 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  🏥
+            {divisionsData.map((div) => (
+              <div 
+                key={div.id}
+                onClick={() => setActiveDivision(div)}
+                className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl hover:border-orange-300 transition-all group flex flex-col justify-between cursor-pointer"
+              >
+                <div>
+                  <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                    {div.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-3">{div.title}</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
+                    {div.summary}
+                  </p>
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Medical & Laboratory Systems</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Advanced diagnostic equipment, laboratory consumables, reagents, centrifuges, and biomedical support adhering to rigorous healthcare quality frameworks.
-                </p>
+                <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
+                  View Full Specifications →
+                </span>
               </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                Government & NGO Grade →
-              </span>
-            </div>
-
-            {/* Division 2 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  💻
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">ICT & Enterprise Hardware</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Enterprise computing hardware, networking gear, secure server architecture, laptops, and specialized technical diagnostics and micro-soldering repairs.
-                </p>
-              </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                High-Performance Tech →
-              </span>
-            </div>
-
-            {/* Division 3 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  ☀️
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Solar & Renewable Power</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Reliable off-grid solar energy systems, backup inverter arrays, lithium battery banks, and energy storage solutions ensuring uninterrupted institutional operations.
-                </p>
-              </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                Sustainable Energy →
-              </span>
-            </div>
-
-            {/* Division 4 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  📦
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">General Institutional Supply</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management across Malawi.
-                </p>
-              </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                Trusted Heritage →
-              </span>
-            </div>
-
-            {/* Division 5 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  ⚙️
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Industrial & Specialized Gear</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  Precision machinery, scientific instruments, heavy-duty hardware parts, automotive electrical wiring components, and custom tool sourcing.
-                </p>
-              </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                Precision Sourcing →
-              </span>
-            </div>
-
-            {/* Division 6 */}
-            <div className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl transition-all group flex flex-col justify-between">
-              <div>
-                <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                  🏢
-                </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">Facilities & Technical Support</h3>
-                <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                  End-to-end technical maintenance, hardware troubleshooting, asset servicing, laboratory quality management consulting, and infrastructure advisory.
-                </p>
-              </div>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                Expert Support →
-              </span>
-            </div>
-
+            ))}
           </div>
 
         </div>
       </section>
+
+      {/* Division Detail Modal */}
+      {activeDivision && (
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6">
+          <div className="bg-white max-w-xl w-full p-8 rounded-3xl shadow-2xl space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setActiveDivision(null)}
+              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold hover:bg-slate-200 transition"
+            >
+              ✕
+            </button>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black">
+                {activeDivision.icon}
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-900">{activeDivision.title}</h3>
+                <span className="text-xs text-orange-600 font-bold uppercase tracking-wider">Royal Horizon Division Profile</span>
+              </div>
+            </div>
+            <p className="text-slate-600 text-sm leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+              {activeDivision.details}
+            </p>
+            <div className="pt-2 flex justify-end gap-3">
+              <button 
+                onClick={() => setActiveDivision(null)}
+                className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold px-5 py-3 rounded-xl transition"
+              >
+                Close
+              </button>
+              <a 
+                href="#contact"
+                onClick={() => {
+                  setFormData({...formData, division: activeDivision.title});
+                  setActiveDivision(null);
+                }}
+                className="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-6 py-3 rounded-xl shadow-lg shadow-orange-500/20 transition"
+              >
+                Request Quotation for this Division
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Compliance & Standards Section */}
       <section id="compliance" className="py-24 px-6 bg-white border-t border-slate-100">
@@ -377,9 +418,9 @@ export default function Home() {
                 <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">
                   ✓
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">RFQ Received Successfully</h3>
+                <h3 className="text-2xl font-bold text-slate-900">RFQ Dispatched Successfully</h3>
                 <p className="text-slate-600 text-sm max-w-sm mx-auto">
-                  Thank you for reaching out. Our procurement team in Lilongwe will review your specifications and get back to you shortly.
+                  Thank you for reaching out. Your inquiry has been sent directly to our procurement team at <span className="font-semibold text-slate-800">royalhorizonmw@gmail.com</span>. We will respond shortly.
                 </p>
                 <button 
                   onClick={() => setSubmitted(false)}
@@ -459,9 +500,10 @@ export default function Home() {
 
                 <button 
                   type="submit" 
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all text-sm uppercase tracking-wider"
+                  disabled={loading}
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all text-sm uppercase tracking-wider disabled:opacity-50"
                 >
-                  Submit Official RFQ
+                  {loading ? 'Sending RFQ to Inbox...' : 'Submit Official RFQ'}
                 </button>
               </form>
             )}

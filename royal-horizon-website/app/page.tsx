@@ -102,8 +102,8 @@ export default function Home() {
               width={2440}
               height={991}
               priority
-              sizes="144px"
-              className="h-auto w-36"
+              sizes="112px"
+              className="h-auto w-28"
             />
           </a>
 

@@ -1,538 +1,570 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
 
-// Service Division Data for Modals
-const divisionsData = [
-  {
-    id: 'medical',
-    title: 'Medical & Laboratory Systems',
-    icon: '🏥',
-    summary: 'Advanced diagnostic equipment, laboratory consumables, reagents, centrifuges, and biomedical support adhering to rigorous healthcare quality frameworks.',
-    details: 'We supply high-precision clinical chemistry analyzers, hematology systems, molecular diagnostics, cold chain storage, and accredited laboratory reagents. Backed by expert biomedical maintenance and calibration support for hospitals, research centers, and public health labs across Malawi.'
-  },
-  {
-    id: 'ict',
-    title: 'ICT & Enterprise Hardware',
-    icon: '💻',
-    summary: 'Enterprise computing hardware, networking gear, secure server architecture, laptops, and specialized technical diagnostics and micro-soldering repairs.',
-    details: 'From robust server racks and enterprise switches to specialized component-level motherboard and electronic board diagnostics. We ensure zero-downtime technology ecosystems for corporate and government institutions.'
-  },
-  {
-    id: 'solar',
-    title: 'Solar & Renewable Power',
-    icon: '☀️',
-    summary: 'Reliable off-grid solar energy systems, backup inverter arrays, lithium battery banks, and energy storage solutions ensuring uninterrupted institutional operations.',
-    details: 'Engineered for critical facilities that demand perpetual uptime. We design and deploy custom commercial solar arrays, hybrid inverter setups, and deep-cycle battery banks to shield your operations from grid instability.'
-  },
-  {
-    id: 'general',
-    title: 'General Institutional Supply',
-    icon: '📦',
-    summary: 'Comprehensive bulk procurement, corporate office provisions, specialized tender fulfillment, and streamlined supply chain management across Malawi.',
-    details: 'A trusted heritage in multi-sector procurement. We handle end-to-end tender execution, rigorous quality verification, and timely institutional logistics.'
-  },
-  {
-    id: 'industrial',
-    title: 'Industrial & Specialized Gear',
-    icon: '⚙️',
-    summary: 'Precision machinery, scientific instruments, heavy-duty hardware parts, automotive electrical wiring components, and custom tool sourcing.',
-    details: 'Sourcing hard-to-find technical machinery, dashboard and steering control modules, industrial sensors, and workshop tools tailored to exacting specifications.'
-  },
-  {
-    id: 'facilities',
-    title: 'Facilities & Technical Support',
-    icon: '🏢',
-    summary: 'End-to-end technical maintenance, hardware troubleshooting, asset servicing, laboratory quality management consulting, and infrastructure advisory.',
-    details: 'Comprehensive support contracts, ISO-aligned quality management advisory, and hands-on facilities maintenance to protect your capital investments.'
-  }
-];
+import React, { useState } from "react";
+import {
+  Menu,
+  X,
+  Stethoscope,
+  Laptop,
+  Sun,
+  Package,
+  HardHat,
+  Wrench,
+  Mail,
+  Phone,
+  MapPin,
+  MessageSquare,
+  Send,
+  CheckCircle,
+  Box,
+} from "lucide-react";
 
 export default function Home() {
-  const [activeDivision, setActiveDivision] = useState<typeof divisionsData[0] | null>(null);
-  
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    division: 'Medical & Laboratory Systems',
-    message: ''
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    // Simulate instant dispatch and open user's email client as backup
+    setIsSubmitted(true);
     setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      
-      // Construct mailto link so it drafts an email to royalhorizonmw@gmail.com
-      const mailtoLink = `mailto:royalhorizonmw@gmail.com?subject=RFQ from ${encodeURIComponent(formData.name)} (${encodeURIComponent(formData.division)})&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nDivision: ${formData.division}\n\nMessage:\n${formData.message}`)}`;
-      window.open(mailtoLink, '_blank');
-    }, 800);
+      setIsSubmitted(false);
+      setIsQuoteModalOpen(false);
+    }, 2500);
   };
 
+  const divisions = [
+    {
+      number: "01",
+      icon: Stethoscope,
+      title: "Medical & Laboratory",
+      text: "Medical equipment, laboratory systems, diagnostics, consumables, and healthcare solutions.",
+    },
+    {
+      number: "02",
+      icon: Laptop,
+      title: "ICT & Hardware",
+      text: "Computers, networking infrastructure, enterprise peripherals, and institutional ICT solutions.",
+    },
+    {
+      number: "03",
+      icon: Sun,
+      title: "Solar & Renewable",
+      text: "Solar systems, commercial backup power, renewable energy equipment, and installation support.",
+    },
+    {
+      number: "04",
+      icon: Package,
+      title: "General Supply",
+      text: "Office supplies, operational consumables, institutional goods, and project procurement.",
+    },
+    {
+      number: "05",
+      icon: HardHat,
+      title: "Industrial Gear",
+      text: "Safety PPE, technical equipment, heavy tools, machinery, and industrial supply solutions.",
+    },
+    {
+      number: "06",
+      icon: Wrench,
+      title: "Facilities Support",
+      text: "Facility equipment, structural maintenance support, and technical service solutions.",
+    },
+  ];
+
   return (
-    <main className="min-h-screen bg-white text-slate-800 selection:bg-orange-500 selection:text-white font-sans scroll-smooth">
-      
-      {/* Top Professional Announcement Bar */}
-      <div className="bg-slate-900 text-white text-xs py-2.5 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
-            <span>Area 12, Lilongwe, Malawi | Co. No: COY-WGWU7L6 | TPIN: 71284360</span>
-          </div>
-          <div className="flex gap-6 text-slate-300">
-            <span>📞 +265 880 273 292</span>
-            <span>✉️ royalhorizonmw@gmail.com</span>
-          </div>
+    <main className="min-h-screen bg-white font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
+      {/* Top Bar Contacts */}
+      <div className="hidden border-b border-slate-100 bg-white lg:block">
+        <div className="mx-auto flex max-w-7xl items-center justify-end gap-8 px-8 py-2.5 text-xs font-medium text-slate-500">
+          <a
+            href="tel:+265880273292"
+            className="flex items-center gap-2 transition hover:text-orange-600"
+          >
+            <Phone className="h-3.5 w-3.5 text-orange-600" /> +265 880 273 292
+          </a>
+          <a
+            href="mailto:royalhorizonmw@gmail.com"
+            className="flex items-center gap-2 transition hover:text-orange-600"
+          >
+            <Mail className="h-3.5 w-3.5 text-orange-600" /> royalhorizonmw@gmail.com
+          </a>
         </div>
       </div>
 
-      {/* Navigation Bar */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-3">
-            <div className="bg-gradient-to-br from-orange-500 to-amber-500 text-white font-black text-xl px-3.5 py-1.5 rounded-xl shadow-lg shadow-orange-500/20">
+      {/* Header */}
+      <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+          <a href="#home" className="flex items-center gap-3 group">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 font-extrabold text-white shadow-md shadow-orange-500/20">
               RH
             </div>
             <div>
-              <span className="text-lg font-extrabold tracking-tight text-slate-900 block leading-none">Royal Horizon</span>
-              <span className="text-[10px] text-orange-600 font-bold tracking-widest uppercase">Limited</span>
+              <p className="text-base font-extrabold tracking-tight text-slate-950 group-hover:text-orange-600 transition-colors">
+                Royal Horizon
+              </p>
+              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-orange-600">
+                Limited
+              </p>
             </div>
-          </div>
-          <nav className="hidden md:flex gap-8 font-medium text-sm text-slate-600">
-            <a href="#home" className="hover:text-orange-600 transition">Home</a>
-            <a href="#about" className="hover:text-orange-600 transition">About Us</a>
-            <a href="#divisions" className="hover:text-orange-600 transition">Divisions & Services</a>
-            <a href="#compliance" className="hover:text-orange-600 transition">Compliance</a>
-            <a href="#contact" className="hover:text-orange-600 transition">Contact & RFQ</a>
-          </nav>
-          <div>
-            <a href="#contact" className="bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all transform hover:-translate-y-0.5">
-              Request a Quote
+          </a>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-10 md:flex">
+            <a
+              href="#home"
+              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+            >
+              Home
             </a>
-          </div>
+            <a
+              href="#about"
+              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+            >
+              About Us
+            </a>
+            <a
+              href="#solutions"
+              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+            >
+              Divisions & Services
+            </a>
+            <a
+              href="#contact"
+              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+            >
+              Contact & RFQ
+            </a>
+            <button
+              onClick={() => setIsQuoteModalOpen(true)}
+              className="rounded-xl border border-orange-200 bg-white px-6 py-2.5 text-sm font-semibold text-orange-600 shadow-sm transition hover:bg-orange-50/50 hover:border-orange-300"
+            >
+              Request Quote
+            </button>
+          </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="rounded-xl p-2 text-slate-700 hover:bg-slate-100 md:hidden transition"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
+
+        {/* Mobile Navigation Dropdown */}
+        {isMobileMenuOpen && (
+          <nav className="border-b border-slate-100 bg-white px-6 py-6 md:hidden shadow-xl">
+            <div className="flex flex-col gap-4">
+              <a
+                href="#home"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                Home
+              </a>
+              <a
+                href="#about"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                About Us
+              </a>
+              <a
+                href="#solutions"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                Divisions & Services
+              </a>
+              <a
+                href="#contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-sm font-medium text-slate-700 hover:text-orange-600"
+              >
+                Contact & RFQ
+              </a>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsQuoteModalOpen(true);
+                }}
+                className="w-full rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3 text-center text-sm font-semibold text-white shadow-md shadow-orange-500/20"
+              >
+                Request Quote
+              </button>
+            </div>
+          </nav>
+        )}
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative pt-20 pb-24 px-6 overflow-hidden bg-gradient-to-b from-white via-orange-50/20 to-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">Malawi's Premier Integrated Partner</span>
-            </div>
-            <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
-              Excellence in <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Supply</span> & Advanced <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-700">Solutions</span>
-            </h1>
-            <p className="text-slate-600 text-lg leading-relaxed max-w-xl">
-              Powering hospitals, NGOs, government institutions, and corporate leaders across Malawi with uncompromising quality, cutting-edge ICT, solar power, and trusted procurement heritage.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a href="#divisions" className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-7 py-3.5 rounded-xl shadow-xl shadow-orange-500/20 transition-all">
-                Explore Divisions
-              </a>
-              <a href="#contact" className="bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 font-semibold px-7 py-3.5 rounded-xl transition-all shadow-sm">
-                Submit Tender / RFQ
-              </a>
-            </div>
-          </div>
-
-          {/* Brand Canvas Preview Card */}
-          <div className="relative flex justify-center items-center">
-            <div className="absolute w-72 h-72 bg-gradient-to-tr from-orange-400/20 to-amber-300/20 rounded-full blur-3xl -z-10 animate-pulse"></div>
-            <div className="w-full h-[400px] bg-white border border-slate-200/80 rounded-3xl shadow-2xl p-6 flex flex-col justify-between relative overflow-hidden group">
-              <div className="absolute top-4 right-4 bg-amber-400/10 border border-amber-400/30 text-amber-700 text-xs font-bold px-3 py-1 rounded-lg">
-                Corporate Showcase
+      <section id="home" className="relative overflow-hidden bg-white py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid items-center gap-16 lg:grid-cols-12">
+            
+            {/* Left Content */}
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-orange-600 mb-6">
+                Malawi's Premier Integrated Partner
               </div>
-              <div className="my-auto text-center space-y-3">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-orange-500 to-amber-400 rounded-2xl shadow-lg flex items-center justify-center text-white text-3xl font-black rotate-12 group-hover:rotate-0 transition-transform duration-500">
-                  RH
+
+              <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
+                Excellence in{" "}
+                <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
+                  Supply
+                </span>{" "}
+                & Advanced{" "}
+                <span className="text-slate-700">Solutions</span>
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+                Powering hospitals, NGOs, government institutions, and corporate
+                leaders across Malawi with uncompromising quality, cutting-edge ICT,
+                solar power, and trusted procurement heritage.
+              </p>
+
+              <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                <a
+                  href="#solutions"
+                  className="rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-center text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:shadow-xl hover:shadow-orange-500/35"
+                >
+                  Explore Divisions
+                </a>
+
+                <button
+                  onClick={() => setIsQuoteModalOpen(true)}
+                  className="rounded-xl border border-slate-200 bg-white px-8 py-4 text-center text-sm font-bold text-slate-700 transition hover:bg-slate-50 hover:border-slate-300"
+                >
+                  Submit Tender / RFQ
+                </button>
+              </div>
+            </div>
+
+            {/* Right Card / Interactive 3D Mockup Box */}
+            <div className="lg:col-span-5">
+              <div className="relative rounded-3xl border border-slate-200/80 bg-white p-6 shadow-2xl shadow-slate-200/50 backdrop-blur-xl sm:p-8">
+                <div className="absolute right-6 top-6 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-bold text-orange-600">
+                  Interactive 3D Asset Space
                 </div>
-                <h3 className="font-bold text-slate-800 text-lg">Royal Horizon Limited</h3>
-                <p className="text-xs text-slate-500 max-w-xs mx-auto">
-                  Registered Enterprise & Specialized Procurement Partner based in Area 12, Lilongwe.
-                </p>
-              </div>
-              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3 flex justify-between items-center text-xs text-slate-600 font-medium">
-                <span>Compliance: Verified</span>
-                <span className="text-orange-600 font-bold">Active Operations</span>
-              </div>
-            </div>
-          </div>
 
-        </div>
-      </section>
-
-      {/* Institutional Trust & Partner Marquee */}
-      <section className="py-12 bg-slate-900 text-white border-y border-slate-800 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="text-center md:text-left">
-              <span className="text-xs font-bold text-orange-400 uppercase tracking-widest block mb-1">Trusted Collaborator</span>
-              <h4 className="text-lg font-bold">Serving Public Health Systems, NGOs & Enterprises</h4>
-            </div>
-            <div className="flex flex-wrap justify-center gap-6 text-xs font-semibold text-slate-300 tracking-wider uppercase">
-              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">🏥 Ministry & Public Health Bodies</span>
-              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">🌐 International NGOs</span>
-              <span className="bg-slate-800/80 border border-slate-700 px-4 py-2.5 rounded-xl">⚡ Corporate Enterprises</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Us Deep-Dive Section */}
-      <section id="about" className="py-24 px-6 bg-white">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">About Royal Horizon</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
-              Rooted in Lilongwe, Built for National Impact
-            </h2>
-            <p className="text-slate-600 text-base leading-relaxed">
-              Royal Horizon Limited is structured as a multi-sector enterprise dedicated to delivering excellence across Malawi's institutional, medical, and technical landscape. Operating from our headquarters in Area 12, Lilongwe, we bridge global manufacturing standards with rigorous local procurement frameworks.
-            </p>
-            <p className="text-slate-600 text-base leading-relaxed">
-              Our leadership and operational teams bring profound technical expertise, ensuring every medical diagnostic tool, enterprise ICT deployment, solar installation, and industrial supply meets the highest compliance benchmarks demanded by government bodies and international NGOs.
-            </p>
-            <div className="grid grid-cols-2 gap-6 pt-4">
-              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/60">
-                <span className="block text-3xl font-black text-orange-600">6+</span>
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1 block">Specialized Divisions</span>
-              </div>
-              <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200/60">
-                <span className="block text-3xl font-black text-slate-900">100%</span>
-                <span className="text-xs font-bold text-slate-600 uppercase tracking-wider mt-1 block">Institutional Grade</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 sm:p-10 rounded-3xl shadow-2xl space-y-6 relative overflow-hidden">
-            <div className="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-2xl"></div>
-            <h3 className="text-xl font-bold border-b border-slate-700 pb-4">Corporate Credentials & Verification</h3>
-            <ul className="space-y-4 text-sm text-slate-300">
-              <li className="flex justify-between items-center py-2 border-b border-slate-800">
-                <span className="text-slate-400">Registered Entity:</span>
-                <span className="font-semibold text-white">Royal Horizon Limited</span>
-              </li>
-              <li className="flex justify-between items-center py-2 border-b border-slate-800">
-                <span className="text-slate-400">Headquarters:</span>
-                <span className="font-semibold text-white">Area 12, Lilongwe, Malawi</span>
-              </li>
-              <li className="flex justify-between items-center py-2 border-b border-slate-800">
-                <span className="text-slate-400">Company Registration:</span>
-                <span className="font-mono text-orange-400 font-bold">COY-WGWU7L6</span>
-              </li>
-              <li className="flex justify-between items-center py-2">
-                <span className="text-slate-400">TPIN Number:</span>
-                <span className="font-mono text-orange-400 font-bold">71284360</span>
-              </li>
-            </ul>
-            <div className="pt-2">
-              <span className="inline-block bg-orange-500/20 border border-orange-500/40 text-orange-300 text-xs font-bold px-3.5 py-1.5 rounded-xl">
-                ✓ Verified Malawi Revenue Authority & Registrar Compliant
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6 Service Divisions Grid with Interactive Modals */}
-      <section id="divisions" className="py-24 px-6 bg-slate-50/70 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto space-y-16">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Core Capabilities</h2>
-            <p className="text-3xl sm:text-4xl font-black text-slate-900">Specialized Service Divisions</p>
-            <p className="text-slate-600">
-              Click on any division below to view comprehensive institutional specifications and procurement details.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {divisionsData.map((div) => (
-              <div 
-                key={div.id}
-                onClick={() => setActiveDivision(div)}
-                className="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-100 hover:shadow-xl hover:border-orange-300 transition-all group flex flex-col justify-between cursor-pointer"
-              >
-                <div>
-                  <div className="w-14 h-14 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                    {div.icon}
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 shadow-inner mb-6 text-orange-500">
+                    <Box className="h-10 w-10 animate-pulse text-orange-500" />
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-3">{div.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-6">
-                    {div.summary}
+                  <h3 className="text-xl font-bold text-slate-900">
+                    Royal Horizon 3D Emblem
+                  </h3>
+                  <p className="mt-2 max-w-xs text-xs text-slate-500 leading-relaxed">
+                    Ready for embedded Spline / Three.js interactive modular carton representing our dual supply & solutions infrastructure.
                   </p>
                 </div>
-                <span className="text-xs font-bold text-orange-600 uppercase tracking-wider flex items-center gap-1 group-hover:translate-x-1 transition-transform pt-4 border-t border-slate-100">
-                  View Full Specifications →
-                </span>
-              </div>
-            ))}
-          </div>
 
-        </div>
-      </section>
-
-      {/* Division Detail Modal */}
-      {activeDivision && (
-        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-6">
-          <div className="bg-white max-w-xl w-full p-8 rounded-3xl shadow-2xl space-y-6 relative animate-in fade-in zoom-in-95 duration-200">
-            <button 
-              onClick={() => setActiveDivision(null)}
-              className="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold hover:bg-slate-200 transition"
-            >
-              ✕
-            </button>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center text-2xl font-black">
-                {activeDivision.icon}
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900">{activeDivision.title}</h3>
-                <span className="text-xs text-orange-600 font-bold uppercase tracking-wider">Royal Horizon Division Profile</span>
-              </div>
-            </div>
-            <p className="text-slate-600 text-sm leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
-              {activeDivision.details}
-            </p>
-            <div className="pt-2 flex justify-end gap-3">
-              <button 
-                onClick={() => setActiveDivision(null)}
-                className="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold px-5 py-3 rounded-xl transition"
-              >
-                Close
-              </button>
-              <a 
-                href="#contact"
-                onClick={() => {
-                  setFormData({...formData, division: activeDivision.title});
-                  setActiveDivision(null);
-                }}
-                className="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-6 py-3 rounded-xl shadow-lg shadow-orange-500/20 transition"
-              >
-                Request Quotation for this Division
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Compliance & Standards Section */}
-      <section id="compliance" className="py-24 px-6 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-xs font-bold text-orange-600 uppercase tracking-widest">Institutional Assurance</h2>
-            <p className="text-3xl sm:text-4xl font-black text-slate-900">Commitment to Quality & Compliance</p>
-            <p className="text-slate-600">
-              Operating under strict quality management frameworks inspired by international standards to guarantee reliability across all public and private sector engagements.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
-                01
-              </div>
-              <h3 className="font-bold text-slate-900 text-lg">Regulatory Alignment</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Fully registered under Malawi corporate laws with active tax compliance and verified TPIN registration for transparent tender processing.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
-                02
-              </div>
-              <h3 className="font-bold text-slate-900 text-lg">Rigorous Sourcing</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Direct partnerships and vetted supply chains ensuring that all medical, ICT, and industrial goods meet exacting specification standards.
-              </p>
-            </div>
-
-            <div className="bg-slate-50 p-8 rounded-3xl border border-slate-200/80 space-y-4">
-              <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center font-bold text-xl">
-                03
-              </div>
-              <h3 className="font-bold text-slate-900 text-lg">Local Expertise</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Lilongwe-based operational presence ensuring rapid response times, personalized technical support, and seamless delivery coordination.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Contact & RFQ Section */}
-      <section id="contact" className="py-24 px-6 bg-slate-50/70 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200/60 px-3.5 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-orange-500"></span>
-              <span className="text-xs font-bold text-orange-600 uppercase tracking-wider">Tender & Quotation Desk</span>
-            </div>
-            <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-              Partner With <span className="text-orange-600">Royal Horizon</span>
-            </h2>
-            <p className="text-slate-600 text-lg leading-relaxed">
-              Whether you are releasing a government tender, procuring medical diagnostics, or ordering enterprise tech solutions, our Lilongwe team is ready to respond with competitive pricing and compliance documentation.
-            </p>
-            
-            <div className="space-y-4 pt-4 border-t border-slate-200 text-slate-600 text-sm">
-              <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-32">Headquarters:</span>
-                <span>Area 12, Lilongwe, Malawi</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-32">Company No:</span>
-                <span className="font-mono bg-white border border-slate-200 px-3 py-1 rounded-lg text-slate-800">COY-WGWU7L6</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-32">TPIN Number:</span>
-                <span className="font-mono bg-white border border-slate-200 px-3 py-1 rounded-lg text-slate-800">71284360</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-32">Direct Phone:</span>
-                <span className="text-slate-800 font-semibold">+265 880 273 292</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="font-bold text-slate-900 w-32">Email Inquiry:</span>
-                <span className="text-orange-600 font-semibold">royalhorizonmw@gmail.com</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Form Card */}
-          <div className="bg-white border border-slate-200/80 p-8 sm:p-10 rounded-3xl shadow-xl">
-            {submitted ? (
-              <div className="text-center py-12 space-y-4">
-                <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto font-bold">
-                  ✓
+                <div className="flex items-center justify-between border-t border-slate-100 pt-4 text-xs font-medium text-slate-500">
+                  <span>Status: Configured for WebGL</span>
+                  <span className="flex items-center gap-1.5 font-bold text-emerald-600">
+                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span> Active Canvas
+                  </span>
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900">RFQ Dispatched Successfully</h3>
-                <p className="text-slate-600 text-sm max-w-sm mx-auto">
-                  Thank you for reaching out. Your email client has been prepared to send your inquiry directly to <span className="font-semibold text-slate-800">royalhorizonmw@gmail.com</span>.
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="bg-slate-50/50 py-24 border-t border-slate-100">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2 items-center">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+                About Us
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                A dependable partner for institutional procurement.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Royal Horizon Limited provides procurement, supply, and
+                technical solutions to organisations across Malawi. We work
+                across healthcare, laboratories, ICT, renewable energy,
+                industrial equipment, facilities support, and general supply with certified precision.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
+                  Company Registration
                 </p>
-                <button 
-                  onClick={() => setSubmitted(false)}
-                  className="mt-4 bg-orange-500 text-white font-semibold px-6 py-2.5 rounded-xl text-sm"
-                >
-                  Send Another Inquiry
-                </button>
+                <p className="mt-2 text-lg font-bold text-slate-900">COY-WGWU7L6</p>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <h3 className="text-xl font-bold text-slate-900 mb-2">Request for Quotation (RFQ)</h3>
-                
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Full Name / Organization</label>
-                  <input 
-                    type="text" 
-                    required 
-                    placeholder="e.g., Ministry of Health / Corporate Buyer" 
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
-                  />
-                </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Email Address</label>
-                    <input 
-                      type="email" 
-                      required 
-                      placeholder="buyer@institution.mw" 
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Phone Number</label>
-                    <input 
-                      type="tel" 
-                      required 
-                      placeholder="+265..." 
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
-                    />
-                  </div>
-                </div>
+              <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
+                <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
+                  TPIN Number
+                </p>
+                <p className="mt-2 text-lg font-bold text-slate-900">71284360</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Select Service Division</label>
-                  <select 
-                    value={formData.division}
-                    onChange={(e) => setFormData({...formData, division: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition"
-                  >
-                    <option>Medical & Laboratory Systems</option>
-                    <option>ICT & Enterprise Hardware</option>
-                    <option>Solar & Renewable Power</option>
-                    <option>General Institutional Supply</option>
-                    <option>Industrial & Specialized Gear</option>
-                    <option>Facilities & Technical Support</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Project Specifications / RFQ Details</label>
-                  <textarea 
-                    rows={4} 
-                    required 
-                    placeholder="Provide details regarding quantities, delivery timeline, or tender requirements..." 
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-orange-500 transition resize-none"
-                  ></textarea>
-                </div>
-
-                <button 
-                  type="submit" 
-                  disabled={loading}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all text-sm uppercase tracking-wider disabled:opacity-50"
-                >
-                  {loading ? 'Preparing Email Dispatch...' : 'Submit Official RFQ'}
-                </button>
-              </form>
-            )}
+      {/* Solutions / Divisions Section */}
+      <section id="solutions" className="bg-white py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="max-w-3xl">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+              Our Divisions
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Integrated supply and technical solutions
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              Royal Horizon operates across six core divisions serving
+              institutional, commercial, and development-sector clients throughout Malawi.
+            </p>
           </div>
 
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {divisions.map((division) => {
+              const IconComponent = division.icon;
+              return (
+                <article
+                  key={division.number}
+                  className="group rounded-3xl border border-slate-200/80 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-bold text-orange-600">
+                      {division.number}
+                    </span>
+                    <div className="rounded-2xl bg-orange-50 p-3.5 text-orange-600 transition group-hover:bg-gradient-to-br group-hover:from-orange-500 group-hover:to-orange-600 group-hover:text-white group-hover:shadow-md group-hover:shadow-orange-500/20">
+                      <IconComponent className="h-6 w-6" />
+                    </div>
+                  </div>
+
+                  <h3 className="mt-6 text-xl font-bold text-slate-900">
+                    {division.title}
+                  </h3>
+
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                    {division.text}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact & RFQ Section */}
+      <section id="contact" className="bg-slate-50/50 py-24 border-t border-slate-100">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid gap-12 lg:grid-cols-2">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
+                Contact & RFQ
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Get in touch with our commercial team.
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
+                Have questions or need assistance with standard procurement orders? Reach out to us directly through our office channels or WhatsApp.
+              </p>
+
+              <div className="mt-8 space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="rounded-xl bg-orange-100/70 p-3.5 text-orange-600">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">Office Location</h4>
+                    <p className="mt-1 text-sm text-slate-600">Area 12, Lilongwe, Malawi</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="rounded-xl bg-orange-100/70 p-3.5 text-orange-600">
+                    <Mail className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">Email Address</h4>
+                    <a href="mailto:royalhorizonmw@gmail.com" className="mt-1 block text-sm font-semibold text-orange-600 hover:underline">
+                      royalhorizonmw@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="rounded-xl bg-orange-100/70 p-3.5 text-orange-600">
+                    <Phone className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">Phone Contact</h4>
+                    <a href="tel:+265880273292" className="mt-1 block text-sm font-semibold text-slate-600 hover:text-orange-600">
+                      +265 880 273 292
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* WhatsApp Direct Box */}
+            <div className="flex flex-col justify-between rounded-3xl border border-slate-200/80 bg-white p-8 shadow-lg shadow-slate-200/30">
+              <div>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">
+                  <MessageSquare className="h-3.5 w-3.5" /> Direct WhatsApp Support
+                </span>
+                <h3 className="mt-4 text-2xl font-bold text-slate-900">
+                  Prefer instant messaging?
+                </h3>
+                <p className="mt-3 text-sm text-slate-600 leading-relaxed">
+                  Chat with our commercial team directly on WhatsApp for fast response times, order updates, and immediate service inquiries.
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <a
+                  href="https://wa.me/265880273292"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-4 text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700"
+                >
+                  <MessageSquare className="h-5 w-5" /> Chat on WhatsApp Now
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800 text-sm">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <div className="bg-orange-500 text-white font-black text-lg px-3 py-1 rounded-lg">
-              RH
-            </div>
-            <div>
-              <span className="text-white font-bold block leading-tight">Royal Horizon Limited</span>
-              <span className="text-xs text-slate-400">Area 12, Lilongwe, Malawi</span>
-            </div>
+      <footer className="bg-white py-12 border-t border-slate-100">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+          <div>
+            <p className="font-extrabold text-lg tracking-tight text-slate-900">
+              ROYAL HORIZON <span className="text-orange-600 font-bold text-xs tracking-widest uppercase ml-1">Limited</span>
+            </p>
+            <p className="mt-1 text-sm text-slate-500">
+              Area 12, Lilongwe, Malawi
+            </p>
           </div>
-          <div className="text-center md:text-right text-xs space-y-1">
-            <p>&copy; {new Date().getFullYear()} Royal Horizon Limited. All rights reserved.</p>
-            <p className="text-slate-400">Co. Reg: COY-WGWU7L6 | TPIN: 71284360</p>
-          </div>
+
+          <p className="text-xs text-slate-400">
+            © 2026 Royal Horizon Limited. All rights reserved.
+          </p>
         </div>
       </footer>
 
+      {/* Request a Quote Modal */}
+      {isQuoteModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm">
+          <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
+            <button
+              onClick={() => setIsQuoteModalOpen(false)}
+              className="absolute right-6 top-6 text-slate-400 hover:text-slate-600"
+            >
+              <X className="h-6 w-6" />
+            </button>
+
+            {isSubmitted ? (
+              <div className="py-12 text-center">
+                <CheckCircle className="mx-auto h-16 w-16 text-emerald-500" />
+                <h3 className="mt-4 text-2xl font-bold text-slate-900">
+                  Request Sent!
+                </h3>
+                <p className="mt-2 text-sm text-slate-600">
+                  Thank you for reaching out. Our procurement team will review your specifications and get back to you shortly.
+                </p>
+              </div>
+            ) : (
+              <>
+                <h3 className="text-2xl font-bold text-slate-950">
+                  Request a Quotation
+                </h3>
+                <p className="mt-1 text-sm text-slate-600">
+                  Fill in your details and requirements to receive an official quote.
+                </p>
+
+                <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                      Full Name / Organization
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Ministry of Health / John Doe"
+                      className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                    />
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        required
+                        placeholder="name@company.com"
+                        className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        required
+                        placeholder="+265..."
+                        className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                      Primary Division
+                    </label>
+                    <select className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                      <option>Medical & Laboratory</option>
+                      <option>ICT & Hardware</option>
+                      <option>Solar & Renewable</option>
+                      <option>General Supply</option>
+                      <option>Industrial Gear</option>
+                      <option>Facilities Support</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                      Specifications & Quantities
+                    </label>
+                    <textarea
+                      rows={4}
+                      required
+                      placeholder="Describe the items, quantities, and delivery timeframe needed..."
+                      className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+                    ></textarea>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:from-orange-600 hover:to-orange-700"
+                  >
+                    <Send className="h-4 w-4" /> Submit Quote Request
+                  </button>
+                </form>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </main>
   );
 }

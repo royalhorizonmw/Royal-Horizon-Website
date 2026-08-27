@@ -606,6 +606,33 @@ export default function Home() {
             </div>
 
           </div>
+
+          <div className="mt-12 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-lg shadow-slate-900/5">
+            <div className="flex flex-col gap-4 border-b border-slate-100 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-600">Visit our office</p>
+                <h3 className="mt-1 text-lg font-bold text-slate-900">Area 12, Lilongwe, Malawi</h3>
+              </div>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Area+12%2C+Lilongwe%2C+Malawi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition hover:border-orange-200 hover:text-orange-600"
+              >
+                <MapPin className="h-4 w-4" /> Open in Google Maps
+              </a>
+            </div>
+            <iframe
+              title="Map showing Royal Horizon Limited office in Area 12, Lilongwe"
+              src="https://www.google.com/maps?q=Area%2012%2C%20Lilongwe%2C%20Malawi&z=15&output=embed"
+              width="100%"
+              height="420"
+              className="block w-full border-0 grayscale-[15%]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
+          </div>
         </div>
       </section>
 

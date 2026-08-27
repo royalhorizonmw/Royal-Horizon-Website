@@ -75,11 +75,12 @@ export default function Home() {
   ];
 
   const institutionTypes = [
-    "Hospitals & Clinics",
-    "Government Institutions",
-    "NGOs & Programmes",
-    "Research Organisations",
-    "Banks & Businesses",
+    ["HC", "Hospitals & Clinics"],
+    ["GI", "Government Institutions"],
+    ["NP", "NGOs & Programmes"],
+    ["RO", "Research Organisations"],
+    ["BB", "Banks & Businesses"],
+    ["IO", "International Organisations"],
   ];
 
   const insights = [
@@ -359,27 +360,24 @@ export default function Home() {
       </section>
 
       {/* Institutional Client Base */}
-      <section aria-labelledby="client-base-title" className="rh-scroll border-y border-slate-100 bg-white/95 py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-sm">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Who we serve</span>
-              <h2 id="client-base-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900">
-                Built for institutional buyers.
-              </h2>
-              <p className="mt-2 text-sm leading-relaxed text-slate-500">
-                Verified client names and logos will be added only with approval.
-              </p>
-            </div>
-            <div className="grid flex-1 grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-              {institutionTypes.map((type) => (
-                <div key={type} className="group flex min-h-28 flex-col justify-between rounded-2xl border border-slate-200 bg-[#f7f7f3] p-4 transition hover:-translate-y-1 hover:bg-white hover:shadow-lg hover:shadow-slate-900/5">
-                  <Building2 className="h-5 w-5 text-slate-400 transition group-hover:text-orange-500" />
-                  <p className="mt-5 text-xs font-bold leading-snug text-slate-700">{type}</p>
+      <section aria-labelledby="client-base-title" className="rh-scroll border-y border-slate-100 bg-white py-14">
+        <div className="mx-auto max-w-7xl px-6 text-center lg:px-8">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Who we serve</span>
+          <h2 id="client-base-title" className="mt-2 text-2xl font-extrabold tracking-tight text-slate-900">
+            Supporting institutions across Malawi.
+          </h2>
+        </div>
+        <div className="rh-logo-marquee mt-9 space-y-3" aria-label="Institution types Royal Horizon serves">
+          {[0, 1].map((row) => (
+            <div key={row} className={`rh-logo-track ${row === 1 ? "rh-logo-track-slow" : ""}`}>
+              {[...institutionTypes, ...institutionTypes].map(([initials, name], index) => (
+                <div key={`${row}-${name}-${index}`} className="rh-institution-logo" aria-hidden={index >= institutionTypes.length}>
+                  <span className="rh-institution-mark"><Building2 className="h-4 w-4" />{initials}</span>
+                  <span>{name}</span>
                 </div>
               ))}
             </div>
-          </div>
+          ))}
         </div>
       </section>
 

@@ -92,6 +92,52 @@ html {
     background-color 220ms ease;
 }
 
+.rh-logo-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.rh-logo-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: rh-logo-scroll 30s linear infinite;
+}
+
+.rh-logo-track-slow {
+  animation-duration: 38s;
+  transform: translateX(-10rem);
+}
+
+.rh-logo-marquee:hover .rh-logo-track {
+  animation-play-state: paused;
+}
+
+.rh-institution-logo {
+  display: flex;
+  min-width: 16rem;
+  align-items: center;
+  gap: 0.9rem;
+  border: 1px solid rgb(226 232 240 / 0.9);
+  border-radius: 1rem;
+  background: #f7f7f3;
+  padding: 0.85rem 1rem;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+.rh-institution-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #78716c;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
 @supports (animation-timeline: view()) {
   .rh-scroll {
     animation: rh-scroll-enter 1ms var(--ease-out) both;
@@ -149,6 +195,11 @@ html {
   }
 }
 
+@keyframes rh-logo-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.375rem)); }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .rh-service-card:hover {
     transform: translateY(-0.45rem);
@@ -173,7 +224,8 @@ html {
 
   .rh-visual,
   .rh-float-card,
-  .rh-orb {
+  .rh-orb,
+  .rh-logo-track {
     animation: none;
   }
 

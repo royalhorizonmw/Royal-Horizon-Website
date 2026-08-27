@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { type FormEvent, useState } from "react";
 import {
   Menu,
   X,
@@ -24,7 +24,7 @@ export default function Home() {
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitted(true);
     setTimeout(() => {
@@ -73,7 +73,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-white font-sans text-slate-900 selection:bg-orange-500 selection:text-white">
+    <main className="rh-site min-h-screen bg-[#f7f7f3] font-sans text-slate-950 selection:bg-orange-500 selection:text-white">
       {/* Top Bar Contacts */}
       <div className="hidden border-b border-slate-100 bg-white lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-end gap-8 px-8 py-2.5 text-xs font-medium text-slate-500">
@@ -93,14 +93,14 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 text-white backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <a href="#home" className="flex items-center gap-3 group">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 font-extrabold text-white shadow-md shadow-orange-500/20">
               RH
             </div>
             <div>
-              <p className="text-base font-extrabold tracking-tight text-slate-950 group-hover:text-orange-600 transition-colors">
+              <p className="text-base font-extrabold tracking-tight text-white transition-colors group-hover:text-orange-400">
                 Royal Horizon
               </p>
               <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-orange-600">
@@ -113,31 +113,31 @@ export default function Home() {
           <nav className="hidden items-center gap-10 md:flex">
             <a
               href="#home"
-              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
             >
               Home
             </a>
             <a
               href="#about"
-              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
             >
               About Us
             </a>
             <a
               href="#solutions"
-              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
             >
               Divisions & Services
             </a>
             <a
               href="#contact"
-              className="text-sm font-medium text-slate-700 transition hover:text-orange-600"
+              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
             >
               Contact & RFQ
             </a>
             <button
               onClick={() => setIsQuoteModalOpen(true)}
-              className="rounded-xl border border-orange-200 bg-white px-6 py-2.5 text-sm font-semibold text-orange-600 shadow-sm transition hover:bg-orange-50/50 hover:border-orange-300"
+              className="rounded-full bg-orange-500 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-400"
             >
               Request Quote
             </button>
@@ -146,7 +146,7 @@ export default function Home() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-xl p-2 text-slate-700 hover:bg-slate-100 md:hidden transition"
+            className="rounded-xl p-2 text-white transition hover:bg-white/10 md:hidden"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -200,26 +200,29 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="relative overflow-hidden bg-white py-16 lg:py-24">
+      <section id="home" className="rh-hero relative overflow-hidden px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
+        <div className="rh-orb rh-orb-one" aria-hidden="true" />
+        <div className="rh-orb rh-orb-two" aria-hidden="true" />
+        <div className="relative mx-auto max-w-[1500px] overflow-hidden rounded-b-[2.5rem] bg-orange-500 py-16 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-16 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/50 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-orange-600 mb-6">
-                Malawi's Premier Integrated Partner
+            <div className="rh-reveal relative z-10 lg:col-span-7">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur">
+                Malawi&apos;s Premier Integrated Partner
               </div>
 
-              <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
+              <h1 className="text-5xl font-extrabold tracking-[-0.045em] text-white sm:text-6xl lg:text-[5.25rem] lg:leading-[0.98]">
                 Excellence in{" "}
-                <span className="bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 bg-clip-text text-transparent">
+                <span className="text-slate-950">
                   Supply
                 </span>{" "}
                 & Advanced{" "}
-                <span className="text-slate-700">Solutions</span>
+                <span className="text-white">Solutions</span>
               </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-orange-50 sm:text-lg">
                 Powering hospitals, NGOs, government institutions, and corporate
                 leaders across Malawi with uncompromising quality, cutting-edge ICT,
                 solar power, and trusted procurement heritage.
@@ -228,14 +231,14 @@ export default function Home() {
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#solutions"
-                  className="rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 px-8 py-4 text-center text-sm font-bold text-white shadow-lg shadow-orange-500/25 transition hover:shadow-xl hover:shadow-orange-500/35"
+                  className="rounded-full bg-slate-950 px-8 py-4 text-center text-sm font-bold text-white shadow-xl transition hover:bg-slate-800"
                 >
                   Explore Divisions
                 </a>
 
                 <button
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="rounded-xl border border-slate-200 bg-white px-8 py-4 text-center text-sm font-bold text-slate-700 transition hover:bg-slate-50 hover:border-slate-300"
+                  className="rounded-full border border-white/40 bg-white/15 px-8 py-4 text-center text-sm font-bold text-white backdrop-blur transition hover:bg-white hover:text-slate-950"
                 >
                   Submit Tender / RFQ
                 </button>
@@ -243,49 +246,67 @@ export default function Home() {
             </div>
 
             {/* Right Card / Interactive 3D Mockup Box */}
-            <div className="lg:col-span-5">
-              <div className="relative rounded-3xl border border-slate-200/80 bg-white p-6 shadow-2xl shadow-slate-200/50 backdrop-blur-xl sm:p-8">
-                <div className="absolute right-6 top-6 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-[11px] font-bold text-orange-600">
-                  Interactive 3D Asset Space
-                </div>
-
-                <div className="flex flex-col items-center justify-center py-16 text-center">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200/60 shadow-inner mb-6 text-orange-500">
-                    <Box className="h-10 w-10 animate-pulse text-orange-500" />
+            <div className="rh-reveal rh-delay relative lg:col-span-5">
+              <div className="rh-float-card absolute -left-4 top-10 z-20 rounded-2xl bg-slate-950 p-4 text-white shadow-2xl sm:-left-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-orange-300">Service reach</p>
+                <p className="mt-1 text-2xl font-black">Nationwide</p>
+              </div>
+              <div className="rh-visual relative rounded-[2.25rem] border border-white/40 bg-white p-5 shadow-2xl shadow-orange-950/20 sm:p-7">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-5">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-500">Royal Horizon</p>
+                    <p className="mt-1 text-lg font-black text-slate-950">Integrated Operations</p>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900">
-                    Royal Horizon 3D Emblem
-                  </h3>
-                  <p className="mt-2 max-w-xs text-xs text-slate-500 leading-relaxed">
-                    Ready for embedded Spline / Three.js interactive modular carton representing our dual supply & solutions infrastructure.
-                  </p>
+                  <div className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700">
+                    Live capability
+                  </div>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-slate-100 pt-4 text-xs font-medium text-slate-500">
-                  <span>Status: Configured for WebGL</span>
-                  <span className="flex items-center gap-1.5 font-bold text-emerald-600">
-                    <span className="h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span> Active Canvas
-                  </span>
+                <div className="grid grid-cols-2 gap-3 py-5">
+                  <div className="col-span-2 rounded-3xl bg-slate-950 p-6 text-white">
+                    <div className="flex items-center justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-white">
+                        <Box className="h-6 w-6" />
+                      </div>
+                      <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold text-slate-300">6 divisions</span>
+                    </div>
+                    <p className="mt-8 text-sm text-slate-400">One dependable procurement partner</p>
+                    <p className="mt-1 text-2xl font-black">Supply. Install. Support.</p>
+                  </div>
+                  <div className="rounded-3xl bg-orange-50 p-5">
+                    <p className="text-3xl font-black text-orange-600">6</p>
+                    <p className="mt-1 text-xs font-semibold text-slate-600">Specialist divisions</p>
+                  </div>
+                  <div className="rounded-3xl bg-emerald-50 p-5">
+                    <CheckCircle className="h-7 w-7 text-emerald-600" />
+                    <p className="mt-3 text-xs font-semibold text-slate-600">Compliant delivery</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between rounded-2xl bg-slate-100 px-4 py-3 text-xs font-semibold text-slate-600">
+                  <span>Medical · ICT · Solar · Industrial</span>
+                  <span className="text-orange-600">Explore →</span>
                 </div>
               </div>
             </div>
 
           </div>
         </div>
+        </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="bg-slate-50/50 py-24 border-t border-slate-100">
+      <section id="about" className="py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 items-center">
+          <div className="grid items-center gap-12 rounded-[2.5rem] bg-slate-950 p-8 text-white sm:p-12 lg:grid-cols-2 lg:p-16">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
                 About Us
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
                 A dependable partner for institutional procurement.
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-600">
+              <p className="mt-4 text-base leading-relaxed text-slate-300">
                 Royal Horizon Limited provides procurement, supply, and
                 technical solutions to organisations across Malawi. We work
                 across healthcare, laboratories, ICT, renewable energy,
@@ -313,7 +334,7 @@ export default function Home() {
       </section>
 
       {/* Solutions / Divisions Section */}
-      <section id="solutions" className="bg-white py-24">
+      <section id="solutions" className="bg-white py-24 sm:rounded-t-[3rem]">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
@@ -334,7 +355,7 @@ export default function Home() {
               return (
                 <article
                   key={division.number}
-                  className="group rounded-3xl border border-slate-200/80 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-500/5"
+                  className="rh-service-card group rounded-[2rem] border border-slate-200/80 bg-[#f7f7f3] p-8"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-bold text-orange-600">

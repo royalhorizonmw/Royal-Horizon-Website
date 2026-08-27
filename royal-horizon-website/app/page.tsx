@@ -73,7 +73,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="rh-site min-h-screen bg-[#f7f7f3] font-sans text-slate-950 selection:bg-orange-500 selection:text-white">
+    <main className="rh-site min-h-screen bg-white font-sans text-slate-800 selection:bg-stone-500 selection:text-white">
       {/* Top Bar Contacts */}
       <div className="hidden border-b border-slate-100 bg-white lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-end gap-8 px-8 py-2.5 text-xs font-medium text-slate-500">
@@ -93,14 +93,14 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-slate-950/95 text-white backdrop-blur-md">
+      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 text-slate-700 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <a href="#home" className="flex items-center gap-3 group">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-orange-400 to-orange-600 font-extrabold text-white shadow-md shadow-orange-500/20">
               RH
             </div>
             <div>
-              <p className="text-base font-extrabold tracking-tight text-white transition-colors group-hover:text-orange-400">
+              <p className="text-base font-extrabold tracking-tight text-slate-800 transition-colors group-hover:text-orange-500">
                 Royal Horizon
               </p>
               <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-orange-600">
@@ -113,31 +113,31 @@ export default function Home() {
           <nav className="hidden items-center gap-10 md:flex">
             <a
               href="#home"
-              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
             >
               Home
             </a>
             <a
               href="#about"
-              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
             >
               About Us
             </a>
             <a
               href="#solutions"
-              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
             >
               Divisions & Services
             </a>
             <a
               href="#contact"
-              className="text-sm font-medium text-slate-300 transition hover:text-orange-400"
+              className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
             >
               Contact & RFQ
             </a>
             <button
               onClick={() => setIsQuoteModalOpen(true)}
-              className="rounded-full bg-orange-500 px-6 py-2.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:bg-orange-400"
+              className="rounded-full border border-orange-200 bg-white px-6 py-2.5 text-sm font-bold text-orange-600 shadow-sm transition hover:bg-orange-50"
             >
               Request Quote
             </button>
@@ -146,7 +146,7 @@ export default function Home() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-xl p-2 text-white transition hover:bg-white/10 md:hidden"
+            className="rounded-xl p-2 text-slate-700 transition hover:bg-slate-100 md:hidden"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -203,26 +203,26 @@ export default function Home() {
       <section id="home" className="rh-hero relative overflow-hidden px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
         <div className="rh-orb rh-orb-one" aria-hidden="true" />
         <div className="rh-orb rh-orb-two" aria-hidden="true" />
-        <div className="relative mx-auto max-w-[1500px] overflow-hidden rounded-b-[2.5rem] bg-orange-500 py-16 lg:py-28">
+        <div className="rh-hero-panel relative mx-auto max-w-[1500px] overflow-hidden rounded-b-[2.5rem] border border-stone-200/80 bg-white/90 py-16 lg:py-28">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid items-center gap-16 lg:grid-cols-12">
             
             {/* Left Content */}
             <div className="rh-reveal relative z-10 lg:col-span-7">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-white backdrop-blur">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-stone-500 backdrop-blur">
                 Malawi&apos;s Premier Integrated Partner
               </div>
 
-              <h1 className="text-5xl font-extrabold tracking-[-0.045em] text-white sm:text-6xl lg:text-[5.25rem] lg:leading-[0.98]">
+              <h1 className="text-5xl font-extrabold tracking-[-0.045em] text-slate-800 sm:text-6xl lg:text-[5.25rem] lg:leading-[0.98]">
                 Excellence in{" "}
-                <span className="text-slate-950">
+                <span className="text-orange-500">
                   Supply
                 </span>{" "}
                 & Advanced{" "}
-                <span className="text-white">Solutions</span>
+                <span className="text-slate-500">Solutions</span>
               </h1>
 
-              <p className="mt-7 max-w-2xl text-base leading-relaxed text-orange-50 sm:text-lg">
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg">
                 Powering hospitals, NGOs, government institutions, and corporate
                 leaders across Malawi with uncompromising quality, cutting-edge ICT,
                 solar power, and trusted procurement heritage.
@@ -231,14 +231,14 @@ export default function Home() {
               <div className="mt-10 flex flex-col gap-4 sm:flex-row">
                 <a
                   href="#solutions"
-                  className="rounded-full bg-slate-950 px-8 py-4 text-center text-sm font-bold text-white shadow-xl transition hover:bg-slate-800"
+                  className="rounded-full bg-[#74787e] px-8 py-4 text-center text-sm font-bold text-white shadow-lg transition hover:bg-[#64686e]"
                 >
                   Explore Divisions
                 </a>
 
                 <button
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="rounded-full border border-white/40 bg-white/15 px-8 py-4 text-center text-sm font-bold text-white backdrop-blur transition hover:bg-white hover:text-slate-950"
+                  className="rounded-full border border-slate-200 bg-white/80 px-8 py-4 text-center text-sm font-bold text-slate-600 shadow-sm backdrop-blur transition hover:border-slate-300 hover:bg-white"
                 >
                   Submit Tender / RFQ
                 </button>
@@ -247,14 +247,14 @@ export default function Home() {
 
             {/* Right Card / Interactive 3D Mockup Box */}
             <div className="rh-reveal rh-delay relative lg:col-span-5">
-              <div className="rh-float-card absolute -left-4 top-10 z-20 rounded-2xl bg-slate-950 p-4 text-white shadow-2xl sm:-left-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-orange-300">Service reach</p>
+              <div className="rh-float-card absolute -left-4 top-10 z-20 rounded-2xl bg-[#777b80] p-4 text-white shadow-2xl sm:-left-10">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-200">Service reach</p>
                 <p className="mt-1 text-2xl font-black">Nationwide</p>
               </div>
-              <div className="rh-visual relative rounded-[2.25rem] border border-white/40 bg-white p-5 shadow-2xl shadow-orange-950/20 sm:p-7">
+              <div className="rh-visual relative rounded-[2.25rem] border border-slate-200/80 bg-white p-5 shadow-2xl shadow-slate-900/10 sm:p-7">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-5">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-orange-500">Royal Horizon</p>
+                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Royal Horizon</p>
                     <p className="mt-1 text-lg font-black text-slate-950">Integrated Operations</p>
                   </div>
                   <div className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700">
@@ -263,9 +263,9 @@ export default function Home() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 py-5">
-                  <div className="col-span-2 rounded-3xl bg-slate-950 p-6 text-white">
+                  <div className="col-span-2 rounded-3xl bg-[#767a80] p-6 text-white">
                     <div className="flex items-center justify-between">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-white">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15 text-white">
                         <Box className="h-6 w-6" />
                       </div>
                       <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold text-slate-300">6 divisions</span>
@@ -273,8 +273,8 @@ export default function Home() {
                     <p className="mt-8 text-sm text-slate-400">One dependable procurement partner</p>
                     <p className="mt-1 text-2xl font-black">Supply. Install. Support.</p>
                   </div>
-                  <div className="rounded-3xl bg-orange-50 p-5">
-                    <p className="text-3xl font-black text-orange-600">6</p>
+                  <div className="rounded-3xl bg-stone-100 p-5">
+                    <p className="text-3xl font-black text-stone-600">6</p>
                     <p className="mt-1 text-xs font-semibold text-slate-600">Specialist divisions</p>
                   </div>
                   <div className="rounded-3xl bg-emerald-50 p-5">
@@ -285,7 +285,7 @@ export default function Home() {
 
                 <div className="flex items-center justify-between rounded-2xl bg-slate-100 px-4 py-3 text-xs font-semibold text-slate-600">
                   <span>Medical · ICT · Solar · Industrial</span>
-                  <span className="text-orange-600">Explore →</span>
+                  <span className="text-stone-600">Explore →</span>
                 </div>
               </div>
             </div>
@@ -296,17 +296,17 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24">
+      <section id="about" className="rh-scroll py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid items-center gap-12 rounded-[2.5rem] bg-slate-950 p-8 text-white sm:p-12 lg:grid-cols-2 lg:p-16">
+          <div className="grid items-center gap-12 rounded-[2.5rem] border border-stone-200 bg-[#ecebe7]/95 p-8 text-slate-800 shadow-sm sm:p-12 lg:grid-cols-2 lg:p-16">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
                 About Us
               </span>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-800 sm:text-5xl">
                 A dependable partner for institutional procurement.
               </h2>
-              <p className="mt-4 text-base leading-relaxed text-slate-300">
+              <p className="mt-4 text-base leading-relaxed text-slate-600">
                 Royal Horizon Limited provides procurement, supply, and
                 technical solutions to organisations across Malawi. We work
                 across healthcare, laboratories, ICT, renewable energy,
@@ -334,7 +334,7 @@ export default function Home() {
       </section>
 
       {/* Solutions / Divisions Section */}
-      <section id="solutions" className="bg-white py-24 sm:rounded-t-[3rem]">
+      <section id="solutions" className="rh-scroll bg-white/95 py-24 sm:rounded-t-[3rem]">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-3xl">
             <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">
@@ -381,7 +381,7 @@ export default function Home() {
       </section>
 
       {/* Contact & RFQ Section */}
-      <section id="contact" className="bg-slate-50/50 py-24 border-t border-slate-100">
+      <section id="contact" className="rh-scroll border-t border-slate-100 bg-slate-50/85 py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2">
             <div>

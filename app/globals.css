@@ -42,8 +42,11 @@ html {
 }
 
 .rh-logo-image {
-  object-fit: fill;
-  transform: scale(2.15);
+  top: -195.58% !important;
+  left: -46.79% !important;
+  width: 195.33% !important;
+  height: 492.95% !important;
+  max-width: none !important;
 }
 
 .rh-reveal {

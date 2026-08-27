@@ -96,13 +96,13 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 text-slate-700 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <a href="#home" className="group block" aria-label="Royal Horizon Limited home">
-            <span className="rh-logo-lockup relative block h-14 w-56 overflow-hidden">
+            <span className="rh-logo-lockup relative block h-14 w-36 overflow-hidden">
               <Image
                 src="/rh-logo-orange.png"
                 alt="Royal Horizon Limited"
                 fill
                 priority
-                sizes="224px"
+                sizes="144px"
                 className="rh-logo-image"
               />
             </span>
@@ -264,12 +264,12 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-3 py-5">
                   <div className="col-span-2 rounded-3xl bg-[#767a80] p-6 text-white">
                     <div className="flex items-center justify-between">
-                      <div className="rh-logo-lockup relative h-14 w-44 overflow-hidden">
+                      <div className="rh-logo-lockup relative h-14 w-36 overflow-hidden">
                         <Image
                           src="/rh-logo-white.png"
                           alt="Royal Horizon Limited"
                           fill
-                          sizes="176px"
+                          sizes="144px"
                           className="rh-logo-image"
                         />
                       </div>
@@ -471,12 +471,12 @@ export default function Home() {
       <footer className="bg-white py-12 border-t border-slate-100">
         <div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <div>
-            <div className="rh-logo-lockup relative h-16 w-60 overflow-hidden">
+            <div className="rh-logo-lockup relative h-16 w-40 overflow-hidden">
               <Image
                 src="/rh-logo-orange.png"
                 alt="Royal Horizon Limited"
                 fill
-                sizes="240px"
+                sizes="160px"
                 className="rh-logo-image"
               />
             </div>

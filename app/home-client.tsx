@@ -24,15 +24,35 @@ import {
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [quoteStatus, setQuoteStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [quoteError, setQuoteError] = useState("");
 
-  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setIsQuoteModalOpen(false);
-    }, 2500);
+    setQuoteStatus("submitting");
+    setQuoteError("");
+
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    try {
+      const response = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = (await response.json()) as { message?: string };
+
+      if (!response.ok) {
+        throw new Error(result.message || "We could not send your request.");
+      }
+
+      form.reset();
+      setQuoteStatus("success");
+    } catch (error) {
+      setQuoteError(error instanceof Error ? error.message : "We could not send your request.");
+      setQuoteStatus("error");
+    }
   };
 
   const divisions = [
@@ -403,16 +423,16 @@ export default function Home() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
-                  Company Registration
+                  Malawi based
                 </p>
-                <p className="mt-2 text-lg font-bold text-slate-900">COY-WGWU7L6</p>
+                <p className="mt-2 text-lg font-bold text-slate-900">Local insight, national reach</p>
               </div>
 
               <div className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-wider text-orange-600">
-                  TPIN Number
+                  Integrated support
                 </p>
-                <p className="mt-2 text-lg font-bold text-slate-900">71284360</p>
+                <p className="mt-2 text-lg font-bold text-slate-900">Supply, installation and service</p>
               </div>
             </div>
           </div>
@@ -670,7 +690,7 @@ export default function Home() {
               <X className="h-6 w-6" />
             </button>
 
-            {isSubmitted ? (
+            {quoteStatus === "success" ? (
               <div className="py-12 text-center">
                 <CheckCircle className="mx-auto h-16 w-16 text-emerald-500" />
                 <h3 className="mt-4 text-2xl font-bold text-slate-900">
@@ -690,13 +710,21 @@ export default function Home() {
                 </p>
 
                 <form onSubmit={handleFormSubmit} className="mt-6 space-y-4">
+                  <div className="absolute -left-[9999px]" aria-hidden="true">
+                    <label htmlFor="company-website">Company website</label>
+                    <input id="company-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+                  </div>
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                       Full Name / Organization
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
+                      minLength={2}
+                      maxLength={120}
+                      autoComplete="name"
                       placeholder="e.g. Ministry of Health / John Doe"
                       className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     />
@@ -709,7 +737,10 @@ export default function Home() {
                       </label>
                       <input
                         type="email"
+                        name="email"
                         required
+                        maxLength={160}
+                        autoComplete="email"
                         placeholder="name@company.com"
                         className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
@@ -720,7 +751,11 @@ export default function Home() {
                       </label>
                       <input
                         type="tel"
+                        name="phone"
                         required
+                        minLength={7}
+                        maxLength={30}
+                        autoComplete="tel"
                         placeholder="+265..."
                         className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                       />
@@ -731,7 +766,7 @@ export default function Home() {
                     <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
                       Primary Division
                     </label>
-                    <select className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+                    <select name="division" required className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
                       <option>Medical & Laboratory</option>
                       <option>ICT & Hardware</option>
                       <option>Solar & Renewable</option>
@@ -747,17 +782,27 @@ export default function Home() {
                     </label>
                     <textarea
                       rows={4}
+                      name="requirements"
                       required
+                      minLength={10}
+                      maxLength={4000}
                       placeholder="Describe the items, quantities, and delivery timeframe needed..."
                       className="mt-1 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
                     ></textarea>
                   </div>
 
+                  {quoteStatus === "error" && (
+                    <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                      {quoteError} You can also contact us by WhatsApp or email.
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:from-orange-600 hover:to-orange-700"
+                    disabled={quoteStatus === "submitting"}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:from-orange-600 hover:to-orange-700 disabled:cursor-wait disabled:opacity-60"
                   >
-                    <Send className="h-4 w-4" /> Submit Quote Request
+                    <Send className="h-4 w-4" /> {quoteStatus === "submitting" ? "Sending securely…" : "Submit Quote Request"}
                   </button>
                 </form>
               </>

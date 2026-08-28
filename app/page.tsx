@@ -1,1 +1,1 @@
-export { default } from "../royal-horizon-website/app/page";
+export { default } from "./home-client";

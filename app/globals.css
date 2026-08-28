@@ -53,6 +53,26 @@ html {
   animation: rh-float 7s var(--ease-in-out) infinite alternate;
 }
 
+.rh-people-stage {
+  position: relative;
+}
+
+.rh-people-column {
+  will-change: transform;
+}
+
+.rh-people-column-up {
+  animation: rh-people-up 14s var(--ease-in-out) infinite alternate;
+}
+
+.rh-people-column-down {
+  animation: rh-people-down 16s var(--ease-in-out) infinite alternate;
+}
+
+.rh-people-card {
+  box-shadow: 0 18px 40px rgb(15 23 42 / 0.1);
+}
+
 .rh-float-card {
   animation: rh-float-card 5s var(--ease-in-out) infinite alternate;
 }
@@ -186,6 +206,16 @@ html {
   }
 }
 
+@keyframes rh-people-up {
+  from { transform: translateY(0); }
+  to { transform: translateY(-11rem); }
+}
+
+@keyframes rh-people-down {
+  from { transform: translateY(-11rem); }
+  to { transform: translateY(0); }
+}
+
 @keyframes rh-orbit {
   from {
     transform: rotate(0deg) translateX(0.7rem) rotate(0deg);
@@ -225,8 +255,10 @@ html {
   .rh-visual,
   .rh-float-card,
   .rh-orb,
-  .rh-logo-track {
+  .rh-logo-track,
+  .rh-people-column {
     animation: none;
+    transform: none;
   }
 
   .rh-service-card {

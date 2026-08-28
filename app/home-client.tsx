@@ -2,6 +2,7 @@
 
 import React, { type FormEvent, useState } from "react";
 import Image from "next/image";
+import { jsPDF } from "jspdf";
 import {
   Menu,
   X,
@@ -16,43 +17,124 @@ import {
   MapPin,
   MessageSquare,
   Send,
-  CheckCircle,
   ArrowUpRight,
   Building2,
+  FileText,
+  Download,
 } from "lucide-react";
+
+type QuotePreview = {
+  name: string;
+  email: string;
+  phone: string;
+  division: string;
+  requirements: string;
+};
 
 export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
-  const [quoteStatus, setQuoteStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-  const [quoteError, setQuoteError] = useState("");
+  const [quotePreview, setQuotePreview] = useState<QuotePreview | null>(null);
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setQuoteStatus("submitting");
-    setQuoteError("");
+    const data = Object.fromEntries(new FormData(e.currentTarget).entries());
+    setQuotePreview({
+      name: String(data.name || ""),
+      email: String(data.email || ""),
+      phone: String(data.phone || ""),
+      division: String(data.division || ""),
+      requirements: String(data.requirements || ""),
+    });
+  };
 
-    const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+  const closeQuoteModal = () => {
+    setIsQuoteModalOpen(false);
+    setQuotePreview(null);
+  };
 
-    try {
-      const response = await fetch("/api/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      const result = (await response.json()) as { message?: string };
+  const downloadQuoteAndOpenWhatsApp = () => {
+    if (!quotePreview) return;
 
-      if (!response.ok) {
-        throw new Error(result.message || "We could not send your request.");
-      }
+    const document = new jsPDF();
+    const orange = [255, 90, 31] as const;
+    const ash = [71, 85, 105] as const;
 
-      form.reset();
-      setQuoteStatus("success");
-    } catch (error) {
-      setQuoteError(error instanceof Error ? error.message : "We could not send your request.");
-      setQuoteStatus("error");
+    document.setFillColor(...orange);
+    document.rect(0, 0, 210, 12, "F");
+    document.setTextColor(...ash);
+    document.setFont("helvetica", "bold");
+    document.setFontSize(18);
+    document.text("ROYAL HORIZON LIMITED", 18, 28);
+    document.setFontSize(11);
+    document.setFont("helvetica", "normal");
+    document.text("Quotation Request Brief", 18, 36);
+    document.setDrawColor(226, 232, 240);
+    document.line(18, 43, 192, 43);
+
+    const fields = [
+      ["Name / organisation", quotePreview.name],
+      ["Email", quotePreview.email],
+      ["Phone", quotePreview.phone],
+      ["Primary division", quotePreview.division],
+      ["Prepared", new Date().toLocaleDateString("en-MW")],
+    ];
+    let y = 55;
+    for (const [label, value] of fields) {
+      document.setFont("helvetica", "bold");
+      document.setFontSize(9);
+      document.setTextColor(...orange);
+      document.text(label.toUpperCase(), 18, y);
+      document.setFont("helvetica", "normal");
+      document.setFontSize(11);
+      document.setTextColor(...ash);
+      document.text(value, 18, y + 6);
+      y += 18;
     }
+
+    document.setFont("helvetica", "bold");
+    document.setFontSize(9);
+    document.setTextColor(...orange);
+    document.text("SPECIFICATIONS & QUANTITIES", 18, y + 2);
+    document.setFont("helvetica", "normal");
+    document.setFontSize(11);
+    document.setTextColor(...ash);
+    const requirementLines = document.splitTextToSize(quotePreview.requirements, 174) as string[];
+    let requirementY = y + 10;
+    for (const line of requirementLines) {
+      if (requirementY > 272) {
+        document.addPage();
+        requirementY = 24;
+      }
+      document.text(line, 18, requirementY);
+      requirementY += 6;
+    }
+    const pageCount = document.getNumberOfPages();
+    for (let page = 1; page <= pageCount; page += 1) {
+      document.setPage(page);
+      document.setFontSize(8);
+      document.setTextColor(100, 116, 139);
+      document.text("This document is a customer request brief and not a priced quotation.", 18, 282);
+      document.text(`Royal Horizon Limited · +265 880 273 292 · Page ${page} of ${pageCount}`, 18, 288);
+    }
+
+    const safeName = quotePreview.name.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase() || "customer";
+    document.save(`royal-horizon-rfq-${safeName}.pdf`);
+
+    const message = [
+      "Hello Royal Horizon Limited,",
+      "",
+      "I would like to request a quotation.",
+      `Name / organisation: ${quotePreview.name}`,
+      `Email: ${quotePreview.email}`,
+      `Phone: ${quotePreview.phone}`,
+      `Division: ${quotePreview.division}`,
+      `Requirements: ${quotePreview.requirements}`,
+      "",
+      "I have downloaded the Royal Horizon RFQ brief and will attach it to this chat.",
+    ].join("\n");
+
+    window.open(`https://wa.me/265880273292?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
   };
 
   const divisions = [
@@ -151,15 +233,17 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 text-slate-700 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
           <a href="#home" className="group block" aria-label="Royal Horizon Limited home">
-            <Image
-              src="/rh-logo-orange-cropped.png"
-              alt="Royal Horizon Limited"
-              width={2440}
-              height={991}
-              priority
-              sizes="112px"
-              className="h-auto w-28"
-            />
+            <span className="block h-10 w-10 overflow-hidden" aria-hidden="true">
+              <Image
+                src="/rh-logo-orange-cropped.png"
+                alt=""
+                width={2440}
+                height={991}
+                priority
+                sizes="100px"
+                className="h-10 w-auto max-w-none"
+              />
+            </span>
           </a>
 
           {/* Desktop Navigation */}
@@ -324,53 +408,31 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Right Card / Interactive 3D Mockup Box */}
+            {/* PayChangu-inspired moving people collage */}
             <div className="rh-reveal rh-delay relative lg:col-span-5">
-              <div className="rh-float-card absolute -left-4 top-10 z-20 rounded-2xl bg-[#777b80] p-4 text-white shadow-2xl sm:-left-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-200">Service reach</p>
-                <p className="mt-1 text-2xl font-black">Nationwide</p>
+              <div className="rh-float-card absolute -left-3 top-12 z-20 rounded-2xl bg-[#777b80] p-4 text-white shadow-2xl sm:-left-8">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-200">Royal Horizon people</p>
+                <p className="mt-1 text-lg font-black">Ready to deliver</p>
               </div>
-              <div className="rh-visual relative rounded-[2.25rem] border border-slate-200/80 bg-white p-5 shadow-2xl shadow-slate-900/10 sm:p-7">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-5">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.18em] text-stone-500">Royal Horizon</p>
-                    <p className="mt-1 text-lg font-black text-slate-950">Integrated Operations</p>
+              <div className="rh-people-stage grid h-[34rem] grid-cols-2 gap-3 overflow-hidden rounded-[2.25rem] border border-white/80 bg-[#ecebe7] p-3 shadow-2xl shadow-slate-900/10">
+                <div className="rh-people-column rh-people-column-up flex flex-col gap-3">
+                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
+                    <Image src="/hero-team-office.png" alt="Royal Horizon team member wearing an ash polo with the embroidered white and yellow R mark" fill priority sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
                   </div>
-                  <div className="rounded-full bg-emerald-50 px-3 py-1 text-[11px] font-bold text-emerald-700">
-                    Live capability
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 py-5">
-                  <div className="col-span-2 rounded-3xl bg-[#767a80] p-6 text-white">
-                    <div className="flex items-center justify-between">
-                      <Image
-                        src="/rh-logo-white-cropped.png"
-                        alt="Royal Horizon Limited"
-                        width={2440}
-                        height={991}
-                        sizes="128px"
-                        className="h-auto w-32"
-                      />
-                      <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-semibold text-slate-300">6 divisions</span>
-                    </div>
-                    <p className="mt-8 text-sm text-slate-400">One dependable procurement partner</p>
-                    <p className="mt-1 text-2xl font-black">Supply. Install. Support.</p>
-                  </div>
-                  <div className="rounded-3xl bg-stone-100 p-5">
-                    <p className="text-3xl font-black text-stone-600">6</p>
-                    <p className="mt-1 text-xs font-semibold text-slate-600">Specialist divisions</p>
-                  </div>
-                  <div className="rounded-3xl bg-emerald-50 p-5">
-                    <CheckCircle className="h-7 w-7 text-emerald-600" />
-                    <p className="mt-3 text-xs font-semibold text-slate-600">Compliant delivery</p>
+                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
+                    <Image src="/hero-team-medical.png" alt="Royal Horizon medical supply specialist wearing a branded white field jacket" fill sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
                   </div>
                 </div>
-
-                <div className="flex items-center justify-between rounded-2xl bg-slate-100 px-4 py-3 text-xs font-semibold text-slate-600">
-                  <span>Medical · ICT · Solar · Industrial</span>
-                  <span className="text-stone-600">Explore →</span>
+                <div className="rh-people-column rh-people-column-down flex flex-col gap-3">
+                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
+                    <Image src="/hero-team-solar.png" alt="Royal Horizon solar field engineer wearing a branded ash work shirt" fill priority sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
+                  </div>
+                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
+                    <Image src="/hero-team-office.png" alt="Royal Horizon team member in a bright institutional office" fill sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
+                  </div>
                 </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-[#ecebe7] to-transparent" />
+                <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-[#ecebe7] to-transparent" />
               </div>
             </div>
 
@@ -684,21 +746,38 @@ export default function Home() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-sm">
           <div className="relative w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl sm:p-8">
             <button
-              onClick={() => setIsQuoteModalOpen(false)}
+              onClick={closeQuoteModal}
               className="absolute right-6 top-6 text-slate-400 hover:text-slate-600"
+              aria-label="Close quotation request"
             >
               <X className="h-6 w-6" />
             </button>
 
-            {quoteStatus === "success" ? (
-              <div className="py-12 text-center">
-                <CheckCircle className="mx-auto h-16 w-16 text-emerald-500" />
-                <h3 className="mt-4 text-2xl font-bold text-slate-900">
-                  Request Sent!
-                </h3>
-                <p className="mt-2 text-sm text-slate-600">
-                  Thank you for reaching out. Our procurement team will review your specifications and get back to you shortly.
-                </p>
+            {quotePreview ? (
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-orange-50 px-3 py-1 text-xs font-bold text-orange-700"><FileText className="h-3.5 w-3.5" /> Preview RFQ brief</span>
+                <h3 className="mt-4 text-2xl font-bold text-slate-950">Check your request</h3>
+                <p className="mt-1 text-sm text-slate-600">Confirm the details, then download the PDF and continue to WhatsApp.</p>
+                <dl className="mt-6 divide-y divide-slate-100 rounded-2xl border border-slate-200 bg-slate-50 px-5">
+                  {[
+                    ["Name / organisation", quotePreview.name],
+                    ["Email", quotePreview.email],
+                    ["Phone", quotePreview.phone],
+                    ["Division", quotePreview.division],
+                    ["Requirements", quotePreview.requirements],
+                  ].map(([label, value]) => (
+                    <div key={label} className="py-3">
+                      <dt className="text-[10px] font-bold uppercase tracking-wider text-orange-600">{label}</dt>
+                      <dd className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-700">{value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <button onClick={() => setQuotePreview(null)} className="rounded-xl border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700">Edit details</button>
+                  <button onClick={downloadQuoteAndOpenWhatsApp} className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white shadow-md shadow-emerald-600/20 transition hover:bg-emerald-700">
+                    <Download className="h-4 w-4" /> Download PDF & Open WhatsApp
+                  </button>
+                </div>
               </div>
             ) : (
               <>
@@ -791,18 +870,11 @@ export default function Home() {
                     ></textarea>
                   </div>
 
-                  {quoteStatus === "error" && (
-                    <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-                      {quoteError} You can also contact us by WhatsApp or email.
-                    </div>
-                  )}
-
                   <button
                     type="submit"
-                    disabled={quoteStatus === "submitting"}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:from-orange-600 hover:to-orange-700 disabled:cursor-wait disabled:opacity-60"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-orange-500 to-orange-600 py-3.5 text-sm font-semibold text-white shadow-md transition hover:from-orange-600 hover:to-orange-700"
                   >
-                    <Send className="h-4 w-4" /> {quoteStatus === "submitting" ? "Sending securely…" : "Submit Quote Request"}
+                    <Send className="h-4 w-4" /> Preview Quote Request
                   </button>
                 </form>
               </>

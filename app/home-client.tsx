@@ -21,6 +21,7 @@ import {
   Building2,
   FileText,
   Download,
+  LogIn,
 } from "lucide-react";
 
 type QuotePreview = {
@@ -32,6 +33,9 @@ type QuotePreview = {
 };
 
 export default function Home() {
+  const portalUrl =
+    process.env.NEXT_PUBLIC_BUSINESS_PORTAL_URL ??
+    "https://app.royalhorizonmw.com/login";
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
   const [quotePreview, setQuotePreview] = useState<QuotePreview | null>(null);
@@ -209,8 +213,21 @@ export default function Home() {
     },
   ];
 
+  const showcaseColumns = [
+    [
+      { image: "/hero-team-office.png", label: "Client support", alt: "Royal Horizon team member supporting an institutional client" },
+      { image: "/insight-medical-supply.png", label: "Healthcare supply", alt: "Medical supplies prepared for institutional delivery" },
+      { image: "/hero-team-medical.png", label: "Medical expertise", alt: "Royal Horizon medical supply specialist" },
+    ],
+    [
+      { image: "/insight-ict-deployment.png", label: "ICT environments", alt: "Technology equipment deployed for an organisation" },
+      { image: "/hero-team-solar.png", label: "Field delivery", alt: "Royal Horizon solar field engineer" },
+      { image: "/insight-solar-project.png", label: "Energy projects", alt: "Solar installation at an institutional environment" },
+    ],
+  ];
+
   return (
-    <main className="rh-site min-h-screen bg-white font-sans text-slate-800 selection:bg-stone-500 selection:text-white">
+    <main className="rh-site min-h-screen bg-white font-sans text-stone-800 selection:bg-orange-500 selection:text-white">
       {/* Top Bar Contacts */}
       <div className="hidden border-b border-slate-100 bg-white lg:block">
         <div className="mx-auto flex max-w-7xl items-center justify-end gap-8 px-8 py-2.5 text-xs font-medium text-slate-500">
@@ -230,24 +247,24 @@ export default function Home() {
       </div>
 
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-slate-200/70 bg-white/90 text-slate-700 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+      <header className="sticky top-0 z-40 border-b border-stone-200/70 bg-white/88 text-stone-700 shadow-[0_10px_35px_rgba(71,54,43,0.05)] backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-8">
           <a href="#home" className="group block" aria-label="Royal Horizon Limited home">
-            <span className="block h-10 w-10 overflow-hidden" aria-hidden="true">
+            <span className="block h-7 w-7 overflow-hidden transition-transform duration-300 group-hover:scale-105" aria-hidden="true">
               <Image
                 src="/rh-logo-orange-cropped.png"
                 alt=""
                 width={2440}
                 height={991}
                 priority
-                sizes="100px"
-                className="h-10 w-auto max-w-none"
+                sizes="56px"
+                className="h-7 w-auto max-w-none"
               />
             </span>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-10 md:flex">
+          <nav className="hidden items-center gap-7 md:flex">
             <a
               href="#home"
               className="text-sm font-medium text-slate-600 transition hover:text-orange-500"
@@ -284,9 +301,15 @@ export default function Home() {
             >
               Contact & RFQ
             </a>
+            <a
+              href={portalUrl}
+              className="inline-flex items-center gap-2 rounded-full bg-stone-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-stone-600 hover:shadow-md"
+            >
+              <LogIn className="h-4 w-4" /> Login
+            </a>
             <button
               onClick={() => setIsQuoteModalOpen(true)}
-              className="rounded-full border border-orange-200 bg-white px-6 py-2.5 text-sm font-bold text-orange-600 shadow-sm transition hover:bg-orange-50"
+              className="rounded-full border border-orange-200 bg-orange-50/70 px-5 py-2 text-sm font-bold text-orange-700 shadow-sm transition hover:-translate-y-0.5 hover:bg-orange-100"
             >
               Request Quote
             </button>
@@ -348,6 +371,13 @@ export default function Home() {
               >
                 Contact & RFQ
               </a>
+              <a
+                href={portalUrl}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-orange-600"
+              >
+                <LogIn className="h-4 w-4" /> Business Portal Login
+              </a>
               <button
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -366,17 +396,17 @@ export default function Home() {
       <section id="home" className="rh-hero relative overflow-hidden px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
         <div className="rh-orb rh-orb-one" aria-hidden="true" />
         <div className="rh-orb rh-orb-two" aria-hidden="true" />
-        <div className="rh-hero-panel relative mx-auto max-w-[1500px] overflow-hidden rounded-b-[2.5rem] border border-stone-200/80 bg-white/90 py-16 lg:py-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid items-center gap-16 lg:grid-cols-12">
+        <div className="rh-hero-panel relative mx-auto max-w-[1500px] overflow-hidden rounded-b-[1.75rem] border border-stone-200/80 bg-white/90 py-12 sm:rounded-b-[2.5rem] sm:py-16 lg:py-28">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-12">
             
             {/* Left Content */}
-            <div className="rh-reveal relative z-10 lg:col-span-7">
+            <div className="rh-reveal relative z-20 lg:col-span-6">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50/70 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-stone-500 backdrop-blur">
                 Malawi&apos;s Premier Integrated Partner
               </div>
 
-              <h1 className="text-5xl font-extrabold tracking-[-0.045em] text-slate-800 sm:text-6xl lg:text-[5.25rem] lg:leading-[0.98]">
+              <h1 className="text-[clamp(2.65rem,12vw,5.25rem)] font-extrabold leading-[1.02] tracking-[-0.045em] text-slate-800 lg:leading-[0.98]">
                 Excellence in{" "}
                 <span className="text-orange-500">
                   Supply
@@ -405,34 +435,29 @@ export default function Home() {
                 >
                   Submit Tender / RFQ
                 </button>
+
+                <a
+                  href={portalUrl}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-orange-200 bg-orange-50/80 px-8 py-4 text-center text-sm font-bold text-orange-600 shadow-sm backdrop-blur transition hover:-translate-y-0.5 hover:bg-orange-100"
+                >
+                  <LogIn className="h-4 w-4" /> Portal Login
+                </a>
               </div>
             </div>
 
-            {/* PayChangu-inspired moving people collage */}
-            <div className="rh-reveal rh-delay relative lg:col-span-5">
-              <div className="rh-float-card absolute -left-3 top-12 z-20 rounded-2xl bg-[#777b80] p-4 text-white shadow-2xl sm:-left-8">
-                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-stone-200">Royal Horizon people</p>
-                <p className="mt-1 text-lg font-black">Ready to deliver</p>
+            {/* PayChangu-inspired layered Royal Horizon character stage */}
+            <div className="rh-reveal rh-delay relative lg:col-span-6 lg:-mr-10">
+              <div className="rh-float-card absolute left-1 top-10 z-30 rounded-2xl border border-white/30 bg-stone-700/95 p-3 text-white shadow-2xl backdrop-blur sm:-left-4 sm:top-16 sm:p-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-orange-200">Royal Horizon</p>
+                <p className="mt-1 text-lg font-black">Ready to help</p>
               </div>
-              <div className="rh-people-stage grid h-[34rem] grid-cols-2 gap-3 overflow-hidden rounded-[2.25rem] border border-white/80 bg-[#ecebe7] p-3 shadow-2xl shadow-slate-900/10">
-                <div className="rh-people-column rh-people-column-up flex flex-col gap-3">
-                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
-                    <Image src="/hero-team-office.png" alt="Royal Horizon team member wearing an ash polo with the embroidered white and yellow R mark" fill priority sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
-                  </div>
-                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
-                    <Image src="/hero-team-medical.png" alt="Royal Horizon medical supply specialist wearing a branded white field jacket" fill sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
-                  </div>
+              <div className="rh-character-stage relative h-[25rem] min-[430px]:h-[30rem] sm:h-[38rem]">
+                <div className="rh-character relative z-10 h-full w-full">
+                  <Image src="/brand/royal-horizon-character.png" alt="Smiling Royal Horizon character wearing the branded orange shirt and pointing forward" fill priority sizes="(max-width: 1024px) 92vw, 620px" className="object-contain object-bottom drop-shadow-[0_28px_35px_rgba(71,54,43,0.22)]" />
                 </div>
-                <div className="rh-people-column rh-people-column-down flex flex-col gap-3">
-                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
-                    <Image src="/hero-team-solar.png" alt="Royal Horizon solar field engineer wearing a branded ash work shirt" fill priority sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
-                  </div>
-                  <div className="rh-people-card relative min-h-[22rem] overflow-hidden rounded-[1.65rem]">
-                    <Image src="/hero-team-office.png" alt="Royal Horizon team member in a bright institutional office" fill sizes="(max-width: 1024px) 50vw, 240px" className="object-cover" />
-                  </div>
-                </div>
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-28 bg-gradient-to-t from-[#ecebe7] to-transparent" />
-                <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-20 bg-gradient-to-b from-[#ecebe7] to-transparent" />
+                <div className="rh-service-chip absolute right-2 top-10 z-20 rounded-full border border-white/70 bg-white/90 px-4 py-2 text-xs font-bold text-stone-700 shadow-lg backdrop-blur">Medical supply</div>
+                <div className="rh-service-chip rh-service-chip-delay absolute bottom-28 left-0 z-20 rounded-full border border-white/70 bg-white/90 px-4 py-2 text-xs font-bold text-stone-700 shadow-lg backdrop-blur">ICT solutions</div>
+                <div className="rh-service-chip rh-service-chip-late absolute bottom-12 right-4 z-20 rounded-full border border-orange-200 bg-orange-50/95 px-4 py-2 text-xs font-bold text-orange-700 shadow-lg backdrop-blur">Solar & energy</div>
               </div>
             </div>
 
@@ -460,6 +485,52 @@ export default function Home() {
               ))}
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Digital product showcase */}
+      <section className="rh-scroll rh-textured-section py-16 sm:py-24" aria-labelledby="business-os-title">
+        <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 sm:gap-14 sm:px-6 lg:grid-cols-[0.78fr_1.22fr] lg:px-8">
+          <div className="max-w-xl">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Royal Horizon Business OS</span>
+            <h2 id="business-os-title" className="mt-3 text-3xl font-extrabold text-stone-900 sm:text-5xl">Your operations, connected on every screen.</h2>
+            <p className="mt-5 text-base leading-relaxed text-stone-600">Manage customers, quotations, orders, inventory, finance and projects from one secure workspace designed around how Royal Horizon works.</p>
+            <div className="mt-7 flex flex-wrap gap-2 text-xs font-bold text-stone-600">
+              {['Sales & CRM', 'Inventory', 'Finance', 'Projects'].map((item) => <span key={item} className="rounded-full border border-stone-200 bg-white/85 px-3 py-2 shadow-sm">{item}</span>)}
+            </div>
+            <a href={portalUrl} className="mt-8 inline-flex items-center gap-2 rounded-full bg-orange-500 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition hover:-translate-y-0.5 hover:bg-orange-600">Open Business OS <ArrowUpRight className="h-4 w-4" /></a>
+          </div>
+
+          <div className="rh-device-scene relative aspect-[3/2] w-full" aria-label="Business OS shown on a realistic laptop and mobile phone">
+            <Image src="/brand/business-os-devices-transparent.png" alt="The real Royal Horizon Business OS Command Center displayed on a premium laptop and smartphone" fill sizes="(max-width: 640px) 94vw, (max-width: 1024px) 88vw, 720px" className="object-contain" />
+          </div>
+        </div>
+      </section>
+
+      {/* Moving people story */}
+      <section className="rh-scroll overflow-hidden bg-white py-16 sm:py-24" aria-labelledby="people-title">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-5 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
+          <div className="order-2 lg:order-1">
+            <div className="rh-people-stage grid h-[25rem] grid-cols-2 gap-2 overflow-hidden rounded-[1.75rem] border border-stone-200 bg-stone-100 p-2 shadow-xl sm:h-[32rem] sm:gap-3 sm:rounded-[2.25rem] sm:p-3">
+              {showcaseColumns.map((column, columnIndex) => (
+                <div key={columnIndex} className={`rh-people-column ${columnIndex === 0 ? "rh-people-column-up" : "rh-people-column-down"} flex flex-col gap-3`}>
+                  {column.map((item, index) => (
+                    <div key={`${item.image}-${index}`} className="rh-people-card group relative min-h-[21rem] overflow-hidden rounded-[1.6rem]">
+                      <Image src={item.image} alt={item.alt} fill sizes="(max-width: 1024px) 50vw, 300px" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-stone-950/75 via-stone-950/20 to-transparent px-4 pb-4 pt-16">
+                        <span className="inline-flex rounded-full border border-white/25 bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">{item.label}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="order-1 lg:order-2">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">People behind the solutions</span>
+            <h2 id="people-title" className="mt-3 text-3xl font-extrabold text-stone-900 sm:text-5xl">Local expertise. Practical delivery.</h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-stone-600">A moving view of our people, products and the institutional environments we support—from office planning and healthcare supply to ICT and solar deployment across Malawi.</p>
+          </div>
         </div>
       </section>
 

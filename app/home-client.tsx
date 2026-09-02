@@ -486,6 +486,26 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        <div className="mx-auto mt-12 max-w-5xl px-6 lg:px-8">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Trusted by</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+            {[
+              { src: "/clients/cmst.png", alt: "Central Medical Stores Trust (CMST)", width: 90, height: 89 },
+              { src: "/clients/agcom.png", alt: "Agricultural Commercialisation Project (AGCOM)", width: 90, height: 80 },
+              { src: "/clients/sffrfm.png", alt: "Smallholder Farmers Fertilizer Revolving Fund of Malawi (SFFRFM)", width: 150, height: 29 },
+            ].map((client) => (
+              <Image
+                key={client.src}
+                src={client.src}
+                alt={client.alt}
+                width={client.width}
+                height={client.height}
+                className="h-12 w-auto object-contain opacity-80 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0"
+              />
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Digital product showcase */}

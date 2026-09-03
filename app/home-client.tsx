@@ -32,7 +32,9 @@ type QuotePreview = {
   requirements: string;
 };
 
-export default function Home() {
+export type PublicPost = { id:string; title:string; slug:string; excerpt:string|null; body:string; content_type:string; cover_image_url:string|null; published_at:string|null };
+
+export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
   const portalUrl =
     process.env.NEXT_PUBLIC_BUSINESS_PORTAL_URL ??
     "https://app.royalhorizonmw.com/login";
@@ -189,7 +191,7 @@ export default function Home() {
     ["IO", "International Organisations"],
   ];
 
-  const insights = [
+  const defaultInsights = [
     {
       category: "Healthcare Supply",
       title: "A practical guide to planning institutional medical supply orders",
@@ -212,6 +214,13 @@ export default function Home() {
       alt: "Engineers inspecting solar panels at an institutional facility in Malawi",
     },
   ];
+  const insights = posts.length ? posts.map((post, index) => ({
+    category: post.content_type.replaceAll("_", " "),
+    title: post.title,
+    summary: post.excerpt || post.body.slice(0, 150),
+    image: post.cover_image_url || ["/insight-medical-supply.png","/insight-ict-deployment.png","/insight-solar-project.png"][index % 3],
+    alt: post.title,
+  })) : defaultInsights;
 
   const showcaseColumns = [
     [
@@ -686,7 +695,7 @@ export default function Home() {
             {insights.map((insight) => (
               <article key={insight.title} className="rh-insight-card group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#f7f7f3]">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image src={insight.image} alt={insight.alt} fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
+                  <Image src={insight.image} alt={insight.alt} fill unoptimized={insight.image.startsWith("http")} sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
                 </div>
                 <div className="p-7">
                   <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-orange-600">{insight.category}</span>

@@ -198,6 +198,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
       summary: "How better specifications, lead-time planning, and delivery checks reduce procurement risk.",
       image: "/insight-medical-supply.png",
       alt: "A Malawian healthcare and procurement team checking delivered medical supplies",
+      href: "/blog",
     },
     {
       category: "ICT Infrastructure",
@@ -205,6 +206,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
       summary: "The essentials behind resilient networks, compatible equipment, and long-term support.",
       image: "/insight-ict-deployment.png",
       alt: "Malawian technology professionals deploying institutional ICT equipment",
+      href: "/blog",
     },
     {
       category: "Renewable Energy",
@@ -212,6 +214,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
       summary: "A clear starting point for sizing, installation planning, maintenance, and continuity.",
       image: "/insight-solar-project.png",
       alt: "Engineers inspecting solar panels at an institutional facility in Malawi",
+      href: "/blog",
     },
   ];
   const insights = posts.length ? posts.map((post, index) => ({
@@ -220,6 +223,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
     summary: post.excerpt || post.body.slice(0, 150),
     image: post.cover_image_url || ["/insight-medical-supply.png","/insight-ict-deployment.png","/insight-solar-project.png"][index % 3],
     alt: post.title,
+    href: `/blog/${post.slug}`,
   })) : defaultInsights;
 
   const showcaseColumns = [
@@ -689,11 +693,11 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-orange-600">Insights</span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Practical thinking for better procurement.</h2>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-slate-500">Guidance for teams planning supply, technology, and infrastructure investments across Malawi.</p>
+            <div><p className="max-w-sm text-sm leading-relaxed text-slate-500">Guidance for teams planning supply, technology, and infrastructure investments across Malawi.</p><a href="/blog" className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-orange-600">View all articles <ArrowUpRight className="h-4 w-4" /></a></div>
           </div>
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {insights.map((insight) => (
-              <article key={insight.title} className="rh-insight-card group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#f7f7f3]">
+              <a href={insight.href} key={insight.title} className="rh-insight-card group block overflow-hidden rounded-[2rem] border border-slate-200 bg-[#f7f7f3]">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={insight.image} alt={insight.alt} fill unoptimized={insight.image.startsWith("http")} sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-[1.04]" />
                 </div>
@@ -703,7 +707,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
                   <p className="mt-3 text-sm leading-relaxed text-slate-600">{insight.summary}</p>
                   <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-slate-700">Read insight <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-1 group-hover:-translate-y-1" /></span>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         </div>

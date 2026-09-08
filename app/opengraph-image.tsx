@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", color: "#64748b", fontSize: 20 }}>
-          <div style={{ display: "flex" }}>Medical · ICT · Solar · Industrial · General Supply</div>
+          <div style={{ display: "flex" }}>Healthcare · ICT · Printing · Facilities · Energy</div>
           <div style={{ display: "flex" }}>royalhorizonmw.com</div>
         </div>
       </div>

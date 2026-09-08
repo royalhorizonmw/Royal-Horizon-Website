@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora } from "next/font/google";
+import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { PageviewTracker } from "./pageview-tracker";
 import "./globals.css";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     siteName: "Royal Horizon Limited",
     title: "Institutional Supply & Solutions Across Malawi",
     description:
-      "Dependable medical, laboratory, ICT, solar, industrial and general supply solutions for organisations across Malawi.",
+      "Dependable healthcare, industrial and general supply, ICT, commercial printing, facilities and energy solutions for organisations across Malawi.",
     images: [
       {
         url: "/opengraph-image",
@@ -80,8 +81,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ffffff",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0f172a" },
+  ],
 };
+
+const themeInitScript = `(function(){try{var s=localStorage.getItem("theme");var d=s==="dark"||(s!=="light"&&window.matchMedia("(prefers-color-scheme: dark)").matches);document.documentElement.classList.toggle("dark",d);}catch(e){}})();`;
 
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -124,8 +130,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${manrope.variable} ${sora.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
+        <Script
+          id="theme-init"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

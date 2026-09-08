@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Sora } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { PageviewTracker } from "./pageview-tracker";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -131,6 +133,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
         {children}
+        <Analytics />
+        <PageviewTracker />
       </body>
     </html>
   );

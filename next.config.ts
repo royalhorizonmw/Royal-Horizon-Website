@@ -1,16 +1,18 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV === "development";
+
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
   "form-action 'self'",
   "frame-ancestors 'none'",
   "object-src 'none'",
-  "script-src 'self' 'unsafe-inline'",
+  `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://*.supabase.co",
   "font-src 'self' data:",
-  "connect-src 'self'",
+  `connect-src 'self' https://app.royalhorizonmw.com https://vitals.vercel-insights.com${isDev ? " http://localhost:3000" : ""}`,
   "frame-src https://www.google.com",
   "upgrade-insecure-requests",
 ].join("; ");

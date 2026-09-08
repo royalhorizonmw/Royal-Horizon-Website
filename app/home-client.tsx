@@ -840,9 +840,13 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
             </p>
           </div>
 
-          <p className="text-xs text-slate-400">
-            © 2026 Royal Horizon Limited. All rights reserved.
-          </p>
+          <div className="flex flex-col items-start gap-2 text-xs text-slate-400 md:items-end">
+            <div className="flex gap-4">
+              <a href="/privacy" className="hover:text-slate-600">Privacy Policy</a>
+              <a href="/terms" className="hover:text-slate-600">Terms &amp; Conditions</a>
+            </div>
+            <p>© 2026 Royal Horizon Limited. All rights reserved.</p>
+          </div>
         </div>
       </footer>
 

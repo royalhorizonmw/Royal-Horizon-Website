@@ -548,6 +548,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
               { src: "/clients/agcom.png", alt: "Agricultural Commercialisation Project (AGCOM)", width: 90, height: 80 },
               { src: "/clients/sffrfm.png", alt: "Smallholder Farmers Fertilizer Revolving Fund of Malawi (SFFRFM)", width: 150, height: 29 },
               { src: "/clients/fobs-scientific.png", alt: "FOBs Scientific Limited", width: 90, height: 90 },
+              { src: "/clients/bioclinical-partners.png", alt: "Bioclinical Partners", width: 155, height: 48 },
             ].map((client) => (
               <Image
                 key={client.src}

@@ -448,7 +448,7 @@ export default function Home({ posts = [], campaign = null, updates = [] }: { po
         )}
       </header>
 
-      <CampaignFeature campaign={campaign} updates={updates}/>
+
       {/* Hero Section */}
       <section id="home" className="rh-hero relative overflow-hidden px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
         <div className="rh-orb rh-orb-one" aria-hidden="true" />
@@ -522,6 +522,8 @@ export default function Home({ posts = [], campaign = null, updates = [] }: { po
         </div>
         </div>
       </section>
+
+      <CampaignFeature campaign={campaign} updates={updates}/>
 
       {/* Institutional Client Base */}
       <section aria-labelledby="client-base-title" className="rh-scroll border-y border-slate-100 bg-white py-14 dark:border-slate-800 dark:bg-slate-900">

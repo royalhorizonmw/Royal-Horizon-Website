@@ -1,4 +1,3 @@
-import { CampaignLink } from "./tracked-link";
 import Image from "next/image";
 import Link from "next/link";
 import type { Campaign } from "./data";
@@ -31,20 +30,7 @@ export function CampaignFeature({
               {campaign.title}
             </h2>
             <p className="mt-5 text-lg leading-relaxed">{campaign.summary}</p>
-            <CampaignLink
-              slug={campaign.slug}
-              event="open"
-              href={"/campaigns/" + campaign.slug}
-              className="mt-6 self-start rounded-full bg-slate-900 px-6 py-3 font-semibold text-white"
-            >
-              Explore the campaign →
-            </CampaignLink>
-            <Link
-              href="/campaigns"
-              className="mt-5 text-sm underline underline-offset-4"
-            >
-              All campaigns & updates
-            </Link>
+
           </div>
           {campaign.images[0] && (
             <Link
@@ -62,21 +48,10 @@ export function CampaignFeature({
           )}
         </div>
       )}
-      {!campaign && (
-        <Link href="/campaigns" className="font-semibold underline">
-          Campaigns & updates →
-        </Link>
-      )}
-      {updates.length > 0 && (
+{updates.length > 0 && (
         <div className="mt-6 flex flex-wrap gap-4">
           {updates.map((c) => (
-            <Link
-              key={c.slug}
-              href={"/campaigns/" + c.slug}
-              className="rounded-xl border px-5 py-3 text-sm"
-            >
-              {c.title} →
-            </Link>
+            <p key={c.slug} className="text-sm text-slate-600">{c.title}</p>
           ))}
         </div>
       )}

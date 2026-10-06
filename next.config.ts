@@ -19,6 +19,7 @@ const contentSecurityPolicy = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  images: {remotePatterns:[{protocol:"https",hostname:"icwnsrmklkiqozpafuvi.supabase.co",pathname:"/storage/v1/object/public/public-content/**"}]},
   turbopack: {
     root: process.cwd(),
   },

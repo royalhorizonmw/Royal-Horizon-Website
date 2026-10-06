@@ -36,9 +36,12 @@ type QuotePreview = {
   requirements: string;
 };
 
+import {CampaignFeature} from './campaigns/feature';
+import type {Campaign} from './campaigns/data';
+
 export type PublicPost = { id:string; title:string; slug:string; excerpt:string|null; body:string; content_type:string; cover_image_url:string|null; published_at:string|null };
 
-export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
+export default function Home({ posts = [], campaign = null, updates = [] }: { posts?: PublicPost[]; campaign?: Campaign|null; updates?: Campaign[] }) {
   const portalUrl =
     process.env.NEXT_PUBLIC_BUSINESS_PORTAL_URL ??
     "https://app.royalhorizonmw.com/login";
@@ -445,6 +448,7 @@ export default function Home({ posts = [] }: { posts?: PublicPost[] }) {
         )}
       </header>
 
+      <CampaignFeature campaign={campaign} updates={updates}/>
       {/* Hero Section */}
       <section id="home" className="rh-hero relative overflow-hidden px-3 pb-3 pt-0 sm:px-5 sm:pb-5">
         <div className="rh-orb rh-orb-one" aria-hidden="true" />

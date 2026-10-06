@@ -1,3 +1,4 @@
+import {getCampaigns} from './campaigns/data';
 import type { MetadataRoute } from "next";
 
 import { getPublicPosts } from "./blog/posts";
@@ -5,6 +6,8 @@ import { getPublicPosts } from "./blog/posts";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const posts = await getPublicPosts();
   return [
+    {url:"https://www.royalhorizonmw.com/campaigns",changeFrequency:"weekly",priority:0.8},
+    ...(await getCampaigns()).map(c=>({url:"https://www.royalhorizonmw.com/campaigns/"+c.slug,changeFrequency:"monthly" as const,priority:0.7})),
     {
       url: "https://www.royalhorizonmw.com",
       lastModified: new Date(),
